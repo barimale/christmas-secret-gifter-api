@@ -1,20 +1,31 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Mini-server configuration
+```
+Public IP: 94.132.173.156
+Local IP: 192.168.2.100
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+username: albergue
+password: albergue 
+```
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+```
+scp -r ./bin/Release/net5.0/publish/* albergue@192.168.2.100:/var/www/albergue.administrator
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+sudo cp ./Properties/albergue-administrator.service /etc/systemd/system/albergue-administrator.service
+sudo systemctl daemon-reload
+cd /etc/systemd/system
+sudo systemctl enable albergue-administrator.service
+sudo sudo journalctl -fu albergue-administrator.service
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+```
+
+https://localhost:5021;
+
+SQLite:
+```
+dotnet tool install --global dotnet-ef
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+
+dotnet ef database update --connection "Data Source=My.db"
+```

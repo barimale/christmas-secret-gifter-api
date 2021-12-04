@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Albergue.Administrator/.vs/Albergue.Administrator/v16
+/Albergue.Administrator/obj
+/Albergue.Administrator/bin
