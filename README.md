@@ -29,3 +29,8 @@ dotnet ef database update
 
 dotnet ef database update --connection "Data Source=My.db"
 ```
+
+# Algorithm
+```
+https://developers.google.com/optimization/assignment/assignment_example
+```
