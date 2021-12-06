@@ -12,7 +12,7 @@ namespace Albergue.Administrator.Repository
         public AdministrationConsoleDbContext(DbContextOptions<AdministrationConsoleDbContext> options)
         : base(options)
         {
-            //intentionally left blank
+            Database.EnsureCreated();
         }
 
         public DbSet<ShopItemEntry> ShopItems { get; set; }
