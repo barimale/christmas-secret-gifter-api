@@ -50,3 +50,7 @@ Each time, you want to deploy the app to Heroku:
 heroku stack:set container
 git push heroku main
 ```
+In case of any error:
+```
+heroku logs --tail
+```
