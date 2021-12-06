@@ -6,8 +6,8 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       },
-      "dotnetRunMessages": "true",
-      "applicationUrl": "http://localhost:5020"
+      "applicationUrl": "http://localhost:5020",
+      "dotnetRunMessages": "true"
     },
     "Albergue.Administrator.DEV": {
       "commandName": "Project",
@@ -16,8 +16,14 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "dotnetRunMessages": "true",
-      "applicationUrl": "http://localhost:5020"
+      "applicationUrl": "http://localhost:5020",
+      "dotnetRunMessages": "true"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true
     }
   }
 }
