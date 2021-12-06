@@ -34,3 +34,11 @@ dotnet ef database update --connection "Data Source=My.db"
 ```
 https://developers.google.com/optimization/assignment/assignment_example
 ```
+
+# Heroku deployment
+```
+choco install heroku-cli
+heroku login
+heroku container:login
+heroku create
+```
