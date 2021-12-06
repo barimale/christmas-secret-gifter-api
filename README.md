@@ -49,6 +49,7 @@ As a result the app in Heroku is created.
 Each time, you want to deploy the app to Heroku:
 ```
 heroku git:remote -a lit-spire-23553
+heroku stack:set container
 git push heroku main
 ```
 In case of any error:

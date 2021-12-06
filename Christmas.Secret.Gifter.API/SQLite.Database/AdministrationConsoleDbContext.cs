@@ -1,5 +1,4 @@
 ﻿using Albergue.Administrator.Entities;
-using Albergue.Administrator.Model;
 using Albergue.Administrator.Repository.Database.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -12,7 +11,8 @@ namespace Albergue.Administrator.Repository
         public AdministrationConsoleDbContext(DbContextOptions<AdministrationConsoleDbContext> options)
         : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
+            //intentionall left blank
         }
 
         public DbSet<ShopItemEntry> ShopItems { get; set; }
