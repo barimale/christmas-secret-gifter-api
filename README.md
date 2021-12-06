@@ -52,6 +52,11 @@ heroku git:remote -a lit-spire-23553
 heroku stack:set container
 git push heroku main
 ```
+or:
+```
+heroku container:push web -a lit-spire-23553
+heroku container:release web -a lit-spire-23553
+```
 In case of any error:
 ```
 heroku logs --tail
