@@ -36,9 +36,17 @@ https://developers.google.com/optimization/assignment/assignment_example
 ```
 
 # Heroku deployment
+## Prereqs
 ```
 choco install heroku-cli
 heroku login
 heroku container:login
 heroku create
+```
+As a result the app in Heroku is created.
+## Startup
+Each time, you want to deploy the app to Heroku:
+```
+heroku stack:set container
+git push heroku main
 ```
