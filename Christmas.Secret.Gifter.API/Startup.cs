@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Albergue.Administrator.HostedServices.Hub;
+using System;
 
 namespace Albergue.Administrator
 {
@@ -105,7 +106,14 @@ namespace Albergue.Administrator
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AdministrationConsoleDbContext dbContext)
         {
-            dbContext.Database.Migrate();
+            try
+            {
+                dbContext.Database.Migrate();
+            }
+            catch (System.Exception)
+            {
+                Console.WriteLine("On Migrate error");
+            }
 
             if (env.IsDevelopment())
             {
