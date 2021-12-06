@@ -1,11 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "aAMrwp6jm7XF5FaKsbgFkH6z/9U5T1fikrJnr4U9pYBfBCfObqCL2EAu2U2GcTv+mItY+2vvTQeBpU9DY0ue5g==",
+  "dgSpecHash": "KnYwiE3vAd6kyqZ2KPBY4Xnv5IDm1G949B1JwTSu8z3S9pxuuFG/dlxhXBAHAqG82fGBFd1rxiBALu1DnEd4/Q==",
   "success": true,
   "projectFilePath": "R:\\gifter\\Christmas-Secret-Gifter-API\\Christmas.Secret.Gifter.API\\Christmas.Secret.Gifter.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mateu\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\google.ortools\\9.1.9490\\google.ortools.9.1.9490.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\google.ortools.runtime.linux-x64\\9.1.9490\\google.ortools.runtime.linux-x64.9.1.9490.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\google.ortools.runtime.osx-x64\\9.1.9490\\google.ortools.runtime.osx-x64.9.1.9490.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\google.ortools.runtime.win-x64\\9.1.9490\\google.ortools.runtime.win-x64.9.1.9490.nupkg.sha512",
+    "C:\\Users\\mateu\\.nuget\\packages\\google.protobuf\\3.18.0\\google.protobuf.3.18.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\mateu\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.6\\microsoft.aspnetcore.authentication.jwtbearer.5.0.6.nupkg.sha512",
