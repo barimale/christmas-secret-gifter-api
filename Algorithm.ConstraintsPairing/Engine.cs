@@ -21,7 +21,7 @@ namespace Algorithm.ConstraintsPairing
             _solver = Solver.CreateSolver(solverType);
         }
 
-        public async Task<AlgorithmResponse> CalculateAsync(InputData input)
+        public async Task<OutputDataSummary> CalculateAsync(InputData input)
         {
             try
             {
@@ -32,8 +32,10 @@ namespace Algorithm.ConstraintsPairing
 
                 Solver.ResultStatus resultStatus = _solver.Solve();
 
-                return new AlgorithmResponse()
+                return new OutputDataSummary()
                 {
+                    IsError = resultStatus == Solver.ResultStatus.OPTIMAL || resultStatus == Solver.ResultStatus.FEASIBLE ? true : false,
+                    Reason = resultStatus.ToString(),
                     Data = new OutputData()
                     {
                         Status = resultStatus,
@@ -45,7 +47,7 @@ namespace Algorithm.ConstraintsPairing
             }
             catch (Exception ex)
             {
-                return new AlgorithmResponse()
+                return new OutputDataSummary()
                 {
                     IsError = true,
                     Reason = ex.Message,
@@ -70,7 +72,6 @@ namespace Algorithm.ConstraintsPairing
                     {
                         if (variables[i, j].SolutionValue() > 0.5)
                         {
-                            var ii = variables[i, j].SolutionValue();
                             result.Add(
                                 new Pair()
                                 {
