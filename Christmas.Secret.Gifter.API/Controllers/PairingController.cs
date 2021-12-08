@@ -44,6 +44,7 @@ namespace Albergue.Administrator.Controllers
                     IsError = result.IsError,
                     Reason = result.Reason,
                     Pairs = result.Data.Pairs,
+                    AnalysisStatus = result.Data.Status.ToString()
                 });
             }
             catch (Exception ex)

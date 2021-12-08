@@ -1,5 +1,4 @@
 ﻿using Algorithm.ConstraintsPairing.Model;
-using Algorithm.ConstraintsPairing.Model.Responses;
 using Google.OrTools.LinearSolver;
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,7 @@ namespace Algorithm.ConstraintsPairing
     public class Engine
     {
         private Solver _solver;
+
         public Engine()
             : this("SCIP")
         {
@@ -34,8 +34,8 @@ namespace Algorithm.ConstraintsPairing
 
                 return new OutputDataSummary()
                 {
-                    IsError = resultStatus == Solver.ResultStatus.OPTIMAL || resultStatus == Solver.ResultStatus.FEASIBLE ? true : false,
-                    Reason = resultStatus.ToString(),
+                    IsError = resultStatus != Solver.ResultStatus.OPTIMAL && resultStatus != Solver.ResultStatus.FEASIBLE ? true : false,
+                    Reason = string.Empty,
                     Data = new OutputData()
                     {
                         Status = resultStatus,
@@ -88,11 +88,6 @@ namespace Algorithm.ConstraintsPairing
 
         private Variable[,] CreateVariables(InputData input)
         {
-            // worker is a gifter, task is a participant
-            // i == j means gifter is not allowed to give a gift himself
-
-            // x[i, j] is an array of 0-1 variables, which will be 1
-            // if worker i is assigned to task j.
             Variable[,] x = new Variable[input.GifterAmount, input.GifterAmount];
             for (int i = 0; i < input.GifterAmount; ++i)
             {
@@ -119,7 +114,6 @@ namespace Algorithm.ConstraintsPairing
         {
             try
             {
-                // Each gifter is assigned to at most one participant.
                 for (int i = 0; i < input.GifterAmount; ++i)
                 {
                     Constraint constraint1 = _solver.MakeConstraint(0, 1, "");
@@ -128,7 +122,7 @@ namespace Algorithm.ConstraintsPairing
                         constraint1.SetCoefficient(variables[i, j], 1);
                     }
                 }
-                // Each participant is assigned to exactly one gifter.
+
                 for (int j = 0; j < input.GifterAmount; ++j)
                 {
                     Constraint constraint2 = _solver.MakeConstraint(1, 1, "");
@@ -149,6 +143,7 @@ namespace Algorithm.ConstraintsPairing
             try
             {
                 Objective objective = _solver.Objective();
+
                 for (int i = 0; i < input.GifterAmount; ++i)
                 {
                     for (int j = 0; j < input.GifterAmount; ++j)
@@ -156,6 +151,7 @@ namespace Algorithm.ConstraintsPairing
                         objective.SetCoefficient(variables[i, j], input.Costs[i, j]);
                     }
                 }
+
                 objective.SetMinimization();
             }
             catch (Exception)
