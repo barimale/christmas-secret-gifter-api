@@ -32,6 +32,12 @@ dotnet ef database update
 dotnet ef database update --connection "Data Source=gifter.db"
 ```
 
+# Known issues
+Nuget: invalid data while decoding:
+```
+dotnet nuget locals all --clear
+```
+
 # Algorithm
 ```
 https://developers.google.com/optimization/assignment/assignment_example
