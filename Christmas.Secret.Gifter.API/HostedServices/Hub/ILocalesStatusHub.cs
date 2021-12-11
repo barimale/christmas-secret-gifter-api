@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Albergue.Administrator.HostedServices.Hub
+namespace Christmas.Secret.Gifter.API.HostedServices.Hub
 {
     public interface ILocalesStatusHub
     {

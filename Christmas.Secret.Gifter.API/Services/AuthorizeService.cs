@@ -7,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Albergue.Administrator.Services
+namespace Christmas.Secret.Gifter.API.Services
 {
     public class AuthorizeService : IAuthorizeService
     {
@@ -82,7 +82,7 @@ namespace Albergue.Administrator.Services
                 //    );
 
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(Configuration.GetValue<String>("Tokens:Key"));
+                var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("Tokens:Key"));
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(claims),

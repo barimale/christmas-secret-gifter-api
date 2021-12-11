@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Albergue.Administrator.Services
+namespace Christmas.Secret.Gifter.API.Services
 {
     public interface IAuthorizeService
     {

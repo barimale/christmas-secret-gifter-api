@@ -1,5 +1,3 @@
-using Albergue.Administrator.HostedServices;
-using Albergue.Administrator.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,10 +12,12 @@ using Microsoft.OpenApi.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Albergue.Administrator.HostedServices.Hub;
 using System;
 using Christmas.Secret.Gifter.Database.SQLite;
 using Christmas.Secret.Gifter.Database.SQLite.Extensions;
+using Christmas.Secret.Gifter.API.HostedServices.Hub;
+using Christmas.Secret.Gifter.API.HostedServices;
+using Christmas.Secret.Gifter.API.Services;
 
 namespace Albergue.Administrator
 {

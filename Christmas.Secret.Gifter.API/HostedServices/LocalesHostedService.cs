@@ -1,6 +1,6 @@
-﻿using Albergue.Administrator.HostedServices.Hub;
-using Albergue.Administrator.Model;
-using Albergue.Administrator.Services;
+﻿using Christmas.Secret.Gifter.API.HostedServices.Hub;
+using Christmas.Secret.Gifter.API.Services;
+using Christmas.Secret.Gifter.Domain;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,7 +9,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Albergue.Administrator.HostedServices
+namespace Christmas.Secret.Gifter.API.HostedServices
 {
     public class LocalesHostedService : IHostedService
     {
@@ -40,17 +40,13 @@ namespace Albergue.Administrator.HostedServices
         {
             _logger.LogInformation("Locales Hosted Service running.");
 
-            _hub.Subscribe<ShopItem>(async (item) =>
+            //WIP check it later
+            _hub.Subscribe<Event>(async (item) =>
             {
                 await DoWorkAsync();
             });
 
-            _hub.Subscribe<Category>(async (item) =>
-            {
-                await DoWorkAsync();
-            });
-
-            _hub.Subscribe<Language>(async (item) =>
+            _hub.Subscribe<Participant>(async (item) =>
             {
                 await DoWorkAsync();
             });

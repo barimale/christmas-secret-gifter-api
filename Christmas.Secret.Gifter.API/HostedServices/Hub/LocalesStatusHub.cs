@@ -2,21 +2,21 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Albergue.Administrator.HostedServices.Hub
+namespace Christmas.Secret.Gifter.API.HostedServices.Hub
 {
     [Authorize]
     public class LocalesStatusHub : Microsoft.AspNetCore.SignalR.Hub<ILocalesStatusHub>
     {
         public override Task OnConnectedAsync()
         {
-            Console.WriteLine(base.Context.ConnectionId + " is connected");
+            Console.WriteLine(Context.ConnectionId + " is connected");
 
             return base.OnConnectedAsync();
         }
 
-        public override Task OnDisconnectedAsync(Exception? exception)
+        public override Task OnDisconnectedAsync(Exception exception)
         {
-            Console.WriteLine(base.Context.ConnectionId + " is disconnected");
+            Console.WriteLine(Context.ConnectionId + " is disconnected");
 
             return base.OnDisconnectedAsync(exception);
         }
