@@ -8,4 +8,9 @@
     <PackageReference Include="Google.OrTools" Version="9.1.9490" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Christmas.Secret.Gifter.Domain\Christmas.Secret.Gifter.Domain.csproj" />
+    <ProjectReference Include="..\Christmas.Secret.Gifter.Domain\Christmas.Secret.Gifter.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,25 +1,20 @@
-﻿using Albergue.Administrator.Entities;
-using Albergue.Administrator.Model;
-using Albergue.Administrator.Repository;
-using AutoMapper;
+﻿using AutoMapper;
+using Christmas.Secret.Gifter.Database.SQLite.Entities;
+using Christmas.Secret.Gifter.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Albergue.Administrator.SQLite.Database.Repositories
+namespace Christmas.Secret.Gifter.Database.SQLite.SQLite.Database.Repositories
 {
-    public class CategoryRepository : ICategoryRepository
+    public class EventRepository : IEventRepository
     {
         private readonly IMapper _mapper;
-        private readonly AdministrationConsoleDbContext _context;
-        private readonly ILogger<CategoryRepository> _logger;
+        private readonly GifterDbContext _context;
+        private readonly ILogger<EventRepository> _logger;
 
-        public CategoryRepository(
-            ILogger<CategoryRepository> logger,
-            AdministrationConsoleDbContext context,
+        public EventRepository(
+            ILogger<EventRepository> logger,
+            GifterDbContext context,
             IMapper mapper)
         {
             _logger = logger;
@@ -27,18 +22,18 @@ namespace Albergue.Administrator.SQLite.Database.Repositories
             _mapper = mapper;
         }
 
-        public async Task<Category> AddAsync(Category item, CancellationToken cancellationToken)
+        public async Task<Event> AddAsync(Event item, CancellationToken cancellationToken)
         {
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var mapped = _mapper.Map<CategoryEntry>(item);
-                var result = await _context.Categories.AddAsync(mapped, cancellationToken);
+                var mapped = _mapper.Map<EventEntry>(item);
+                var result = await _context.Events.AddAsync(mapped, cancellationToken);
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                var mappedResult = _mapper.Map<Category>(result.Entity);
+                var mappedResult = _mapper.Map<Event>(result.Entity);
 
                 return mappedResult;
             }
@@ -49,32 +44,27 @@ namespace Albergue.Administrator.SQLite.Database.Repositories
             }
         }
 
-        public async Task<Category> UpdateAsync(Category item, CancellationToken cancellationToken)
+        public async Task<Event> UpdateAsync(Event item, CancellationToken cancellationToken)
         {
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var mapped = _mapper.Map<CategoryEntry>(item);
+                var mapped = _mapper.Map<EventEntry>(item);
 
-                var found = await _context
-                   .Categories
-                   .Include(p => p.TranslatableDetails)
-                   .ThenInclude(pp => pp.Language)
+                var existed = await _context
+                   .Events
+                   .Include(p => p.Participants)
                    .AsQueryable()
                    .FirstOrDefaultAsync(p => p.Id == item.Id, cancellationToken);
 
-                found.TranslatableDetails.Clear();
-                found.TranslatableDetails = mapped.TranslatableDetails;
-                found.KeyName = mapped.KeyName;
+                await _context.SaveChangesAsync(cancellationToken);
+
+                var result = _context.Update(existed);
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                var result = _context.Update<CategoryEntry>(found);
-
-                await _context.SaveChangesAsync(cancellationToken);
-
-                var mappedResult = _mapper.Map<Category>(result.Entity);
+                var mappedResult = _mapper.Map<Event>(result.Entity);
 
                 return mappedResult;
             }
@@ -91,11 +81,11 @@ namespace Albergue.Administrator.SQLite.Database.Repositories
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var found = await _context.Categories.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+                var existed = await _context.Events.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
 
                 var deleted = _context
-                    .Categories
-                    .Remove(found);
+                    .Events
+                    .Remove(existed);
 
                 var result = await _context.SaveChangesAsync(cancellationToken);
 
@@ -108,16 +98,15 @@ namespace Albergue.Administrator.SQLite.Database.Repositories
             }
         }
 
-        public async Task<Category> GetByIdAsync(string id, CancellationToken cancellationToken)
+        public async Task<Event> GetByIdAsync(string id, CancellationToken cancellationToken)
         {
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var found = await _context
-                    .Categories
-                    .Include(p => p.TranslatableDetails)
-                    .ThenInclude(pp => pp.Language)
+                    .Events
+                    .Include(p => p.Participants)
                     .AsQueryable()
                     .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
 
@@ -126,7 +115,7 @@ namespace Albergue.Administrator.SQLite.Database.Repositories
                     return null;
                 }
 
-                var mappedResult = _mapper.Map<Category>(found);
+                var mappedResult = _mapper.Map<Event>(found);
 
                 return mappedResult;
             }
@@ -138,19 +127,19 @@ namespace Albergue.Administrator.SQLite.Database.Repositories
             return null;
         }
 
-        public async Task<Category[]> GetAllAsync(CancellationToken? cancellationToken)
+        public async Task<Event[]> GetAllAsync(CancellationToken? cancellationToken)
         {
             try
             {
                 cancellationToken?.ThrowIfCancellationRequested();
 
                 var allOfThem = await _context
-                    .Categories
-                    .Include(p => p.TranslatableDetails)
-                    .ThenInclude(pp => pp.Language)
-                    .ToArrayAsync(cancellationToken?? default);
+                    .Events
+                    .Include(p => p.Participants)
+                    //.ThenInclude(pp => pp.Language)
+                    .ToArrayAsync(cancellationToken ?? default);
 
-                var mapped = allOfThem.Select(p => _mapper.Map<Category>(p));
+                var mapped = allOfThem.Select(p => _mapper.Map<Event>(p));
 
                 return mapped.ToArray();
             }

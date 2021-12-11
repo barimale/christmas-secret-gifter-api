@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 
-namespace Albergue.Administrator.Repository.Database.Configuration
+namespace Christmas.Secret.Gifter.Database.SQLite.SQLite.Database.Configuration
 {
     public class IdentityUserEntryConfiguration : IEntityTypeConfiguration<IdentityUser>
     {

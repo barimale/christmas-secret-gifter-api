@@ -1,6 +1,5 @@
-﻿using Albergue.Administrator.Model;
-using Albergue.Administrator.Repository;
-using Albergue.Administrator.Services;
+﻿using Albergue.Administrator.Services;
+using Christmas.Secret.Gifter.API.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -9,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Albergue.Administrator.Controllers
+namespace Christmas.Secret.Gifter.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
@@ -21,7 +20,7 @@ namespace Albergue.Administrator.Controllers
         private readonly UserManager<IdentityUser> _userManager;
 
         public UserController(
-            ILogger<UserController> logger, 
+            ILogger<UserController> logger,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             IAuthorizeService authorizeService)

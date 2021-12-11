@@ -1,14 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Albergue.Administrator.Model
+﻿namespace Christmas.Secret.Gifter.API.Model
 {
     public class LoginDetails
     {
-        [Required]
         public string Username { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }

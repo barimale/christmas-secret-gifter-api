@@ -1,12 +1,12 @@
-﻿using Albergue.Administrator.Entities;
+﻿using Christmas.Secret.Gifter.Database.SQLite.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Albergue.Administrator.Repository.Database.Configuration
+namespace Christmas.Secret.Gifter.Database.SQLite.SQLite.Database.Configuration
 {
-    public class CategoryEntryConfiguration : IEntityTypeConfiguration<CategoryEntry>
+    public class EventEntryConfiguration : IEntityTypeConfiguration<EventEntry>
     {
-        public void Configure(EntityTypeBuilder<CategoryEntry> builder)
+        public void Configure(EntityTypeBuilder<EventEntry> builder)
         {
             builder.HasKey(o => o.Id);
             builder.Property(p => p.Id)

@@ -9,7 +9,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Albergue.Administrator.Controllers
+namespace Christmas.Secret.Gifter.API.Controllers
 {
     [AllowAnonymous]
     [Route("api/engine/[controller]/[action]")]
@@ -33,7 +33,7 @@ namespace Albergue.Administrator.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AlgorithmResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> Analyze([FromBody]AlgorithmRequest input, CancellationToken cancellationToken)
+        public async Task<ActionResult> Analyze([FromBody] AlgorithmRequest input, CancellationToken cancellationToken)
         {
             try
             {

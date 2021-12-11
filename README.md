@@ -20,14 +20,16 @@ sudo sudo journalctl -fu albergue-administrator.service
 
 https://localhost:5021;
 
-SQLite:
+# SQLite:
+navigate to the database project directory first.
+Then execute as follows:
 ```
 dotnet tool install --global dotnet-ef
 dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 
-dotnet ef database update --connection "Data Source=My.db"
+dotnet ef database update --connection "Data Source=gifter.db"
 ```
 
 # Algorithm

@@ -1,7 +1,5 @@
 using Albergue.Administrator.HostedServices;
-using Albergue.Administrator.Repository;
 using Albergue.Administrator.Services;
-using Albergue.Administrator.SQLite.Database.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,12 +11,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Albergue.Administrator.HostedServices.Hub;
 using System;
+using Christmas.Secret.Gifter.Database.SQLite;
+using Christmas.Secret.Gifter.Database.SQLite.Extensions;
 
 namespace Albergue.Administrator
 {
@@ -34,23 +33,23 @@ namespace Albergue.Administrator
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddSingleton<ILocalesStatusHub, LocalesStatusHub>();
+
             services.AddScoped<IImageExtractor, ImageExtractor>();
             services.AddScoped<ILocalesGenerator, LocalesGenerator>();
             services.AddScoped<IAuthorizeService, AuthorizeService>();
-            services.AddTransient<ICategoryRepository, CategoryRepository>();
-            services.AddTransient<IItemRepository, ItemRepository>();
-            services.AddTransient<ILanguageRepository, LanguageRepository>();
+
+            services.AddSQLLiteDatabase();
 
             services.AddAutoMapper(typeof(Startup));
             services.AddCors();
 
-            services.AddDbContext<AdministrationConsoleDbContext>(options =>
+            services.AddDbContext<GifterDbContext>(options =>
                 options
-                    .UseSqlite(Configuration.GetConnectionString("AdministrationConsoleDbContext"),
-                b => b.MigrationsAssembly(typeof(AdministrationConsoleDbContext).Assembly.FullName)));
+                    .UseSqlite(Configuration.GetConnectionString("GifterDbContext"),
+                b => b.MigrationsAssembly(typeof(GifterDbContext).Assembly.FullName)));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<AdministrationConsoleDbContext>()
+                .AddEntityFrameworkStores<GifterDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
 
@@ -77,7 +76,7 @@ namespace Albergue.Administrator
             });
 
             services.AddSignalR();
-
+            services.AddRouting(options => options.LowercaseUrls = true);
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -104,7 +103,7 @@ namespace Albergue.Administrator
             services.AddHostedService<LocalesHostedService>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AdministrationConsoleDbContext dbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GifterDbContext dbContext)
         {
             try
             {
