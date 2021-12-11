@@ -34,6 +34,11 @@ dotnet-typegen --project-folder  ./Christmas.Secret.Gifter.Domain generate
 ```
 TypeScript Barrel Generator
 ```
+## ESLint & Prettier - VS Code
+```
+npm install -D eslint prettier eslint-config-prettier
+npx eslint --init
+```
 
 # Database.SQLite:
 navigate to the database project directory first.
