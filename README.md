@@ -20,7 +20,22 @@ sudo sudo journalctl -fu albergue-administrator.service
 
 https://localhost:5021;
 
-# SQLite:
+# TypeGen
+Install:
+```
+dotnet tool install --global dotnet-typegen
+```
+Rebuild the solution and then by being in the root directory execute:
+```
+dotnet-typegen --project-folder  ./Christmas.Secret.Gifter.Domain generate
+```
+# Frontend Extensions - VS Code
+## Generate barrels
+```
+TypeScript Barrel Generator
+```
+
+# Database.SQLite:
 navigate to the database project directory first.
 Then execute as follows:
 ```

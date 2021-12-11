@@ -1,5 +1,8 @@
-﻿namespace Christmas.Secret.Gifter.Domain
+﻿using TypeGen.Core.TypeAnnotations;
+
+namespace Christmas.Secret.Gifter.Domain
 {
+    [ExportTsInterface]
     public class Event
     {
         public string Id { get; set; }

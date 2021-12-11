@@ -1,11 +1,14 @@
-﻿namespace Christmas.Secret.Gifter.Domain
+﻿using TypeGen.Core.TypeAnnotations;
+
+namespace Christmas.Secret.Gifter.Domain
 {
+    [ExportTsInterface]
     public class Participant
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public List<int> ExcludedIds { get; set; }
+        public IEnumerable<int> ExcludedIds { get; set; }
         public int[] ToInputDataRow(int amountOfParticipants)
         {
             var row = new int[amountOfParticipants];
