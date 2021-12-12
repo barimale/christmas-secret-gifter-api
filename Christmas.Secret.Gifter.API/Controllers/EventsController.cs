@@ -30,7 +30,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
             _eventService = eventService;
         }
 
-        [HttpPost]
+        [HttpPost("[controller]/[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Event))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Create(CancellationToken cancellationToken)
@@ -41,7 +41,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
 
                 var newEvent = new Event()
                 {
-                    Id = Guid.NewGuid().ToString()
+                    EventId = Guid.NewGuid().ToString()
                 };
 
                 var created = await _eventService.AddAsync(newEvent, cancellationToken);
@@ -56,7 +56,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
             }
         }
 
-        [HttpPost("execute/{eventId}")]
+        [HttpPost("[controller]/{eventId}/execute")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Event))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Execute(string eventId, CancellationToken cancellationToken)

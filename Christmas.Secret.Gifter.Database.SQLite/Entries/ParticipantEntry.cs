@@ -9,7 +9,9 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Entries
         public int OrderId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public IEnumerable<int> ExcludedOrderIds { get; set; }
+
+        [Column(TypeName = "nvarchar(2400)")]
+        public int[] ExcludedOrderIds { get; set; }
 
         public int ParentId { get; set; }
         public EventEntry Parent { get; set; }

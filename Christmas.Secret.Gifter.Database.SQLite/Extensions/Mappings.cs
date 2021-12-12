@@ -8,10 +8,13 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Extensions
     {
         public Mappings()
         {
-            CreateMap<Event, EventEntry>().ReverseMap();
-            CreateMap<EventEntry, EventEntry>();
+            CreateMap<Event, EventEntry>()
+                .ReverseMap();
 
-            CreateMap<Participant, ParticipantEntry>().ReverseMap();
+            CreateMap<Participant, ParticipantEntry>()
+                .ReverseMap();
+
+            CreateMap<EventEntry, EventEntry>();
             CreateMap<ParticipantEntry, ParticipantEntry>();
         }
     }

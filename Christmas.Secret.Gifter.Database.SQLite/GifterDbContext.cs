@@ -11,8 +11,7 @@ namespace Christmas.Secret.Gifter.Database.SQLite
         public GifterDbContext(DbContextOptions<GifterDbContext> options)
         : base(options)
         {
-            //Database.EnsureCreated();
-            //intentionall left blank
+            Database.EnsureCreated();
         }
 
         public DbSet<EventEntry> Events { get; set; }
@@ -21,9 +20,6 @@ namespace Christmas.Secret.Gifter.Database.SQLite
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            //modelBuilder.ApplyConfiguration(new EventEntryConfiguration());
-            //modelBuilder.ApplyConfiguration(new IdentityUserEntryConfiguration());
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }

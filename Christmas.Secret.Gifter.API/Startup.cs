@@ -18,6 +18,7 @@ using Christmas.Secret.Gifter.Database.SQLite.Extensions;
 using Christmas.Secret.Gifter.API.HostedServices.Hub;
 using Christmas.Secret.Gifter.API.HostedServices;
 using Christmas.Secret.Gifter.API.Services;
+using Christmas.Secret.Gifter.API.Services.Abstractions;
 
 namespace Albergue.Administrator
 {
@@ -37,10 +38,10 @@ namespace Albergue.Administrator
             services.AddScoped<IImageExtractor, ImageExtractor>();
             services.AddScoped<ILocalesGenerator, LocalesGenerator>();
             services.AddScoped<IAuthorizeService, AuthorizeService>();
+            services.AddScoped<IEventService, EventService>();
 
             services.AddSQLLiteDatabase();
 
-            services.AddAutoMapper(typeof(Startup));
             services.AddCors();
 
             services.AddDbContext<GifterDbContext>(options =>
@@ -81,7 +82,7 @@ namespace Albergue.Administrator
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Albergue.Administrator", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Christmas-Secret-Gifter-API", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -118,7 +119,7 @@ namespace Albergue.Administrator
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AdministrationConsoleDbContext v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GifterDbContext v1"));
             }
 
             app.UseRouting();

@@ -5,8 +5,9 @@ namespace Christmas.Secret.Gifter.Domain
     [ExportTsInterface]
     public class Event
     {
-        public string Id { get; set; }
+        public string EventId { get; set; }
         public int OrginizerId { get; set; }
         public EventState State { get; set; }
+        public IEnumerable<Participant> Participants { get; set; } = new List<Participant>();
     }
 }
