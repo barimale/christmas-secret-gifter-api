@@ -1,4 +1,4 @@
-﻿using Christmas.Secret.Gifter.Database.SQLite.Entities;
+﻿using Christmas.Secret.Gifter.Database.SQLite.Entries;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +16,7 @@ namespace Christmas.Secret.Gifter.Database.SQLite
         }
 
         public DbSet<EventEntry> Events { get; set; }
+        public DbSet<ParticipantEntry> Participants { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

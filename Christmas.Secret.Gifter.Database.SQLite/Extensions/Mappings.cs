@@ -1,14 +1,18 @@
 ﻿using AutoMapper;
-using Christmas.Secret.Gifter.Database.SQLite.Entities;
+using Christmas.Secret.Gifter.Database.SQLite.Entries;
 using Christmas.Secret.Gifter.Domain;
 
-namespace Christmas.Secret.Gifter.Database.SQLite.Configuration
+namespace Christmas.Secret.Gifter.Database.SQLite.Extensions
 {
     public class Mappings : Profile
     {
         public Mappings()
         {
             CreateMap<Event, EventEntry>().ReverseMap();
+            CreateMap<EventEntry, EventEntry>();
+
+            CreateMap<Participant, ParticipantEntry>().ReverseMap();
+            CreateMap<ParticipantEntry, ParticipantEntry>();
         }
     }
 }

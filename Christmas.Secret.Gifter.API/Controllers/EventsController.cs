@@ -1,4 +1,6 @@
-﻿using Christmas.Secret.Gifter.Domain;
+﻿using AutoMapper;
+using Christmas.Secret.Gifter.API.Services.Abstractions;
+using Christmas.Secret.Gifter.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,11 +16,18 @@ namespace Christmas.Secret.Gifter.API.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
+        private readonly IMapper _mapper;
+        private readonly IEventService _eventService;
         private readonly ILogger<EventsController> _logger;
 
-        public EventsController(ILogger<EventsController> logger)
+        public EventsController(
+            ILogger<EventsController> logger,
+            IMapper mapper,
+            IEventService eventService)
         {
             _logger = logger;
+            _mapper = mapper;
+            _eventService = eventService;
         }
 
         [HttpPost]
@@ -28,7 +37,37 @@ namespace Christmas.Secret.Gifter.API.Controllers
         {
             try
             {
-                return Ok(new Event());
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var newEvent = new Event()
+                {
+                    Id = Guid.NewGuid().ToString()
+                };
+
+                var created = await _eventService.AddAsync(newEvent, cancellationToken);
+
+                return Ok(created);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("execute/{eventId}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Event))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> Execute(string eventId, CancellationToken cancellationToken)
+        {
+            try
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var result = await _eventService.ExecuteAsync(eventId, cancellationToken);
+
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -45,7 +84,16 @@ namespace Christmas.Secret.Gifter.API.Controllers
         {
             try
             {
-                return Ok(new Event());
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var existed = await _eventService.GetByIdAsync(id, cancellationToken);
+
+                if(existed == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(existed);
             }
             catch (Exception ex)
             {

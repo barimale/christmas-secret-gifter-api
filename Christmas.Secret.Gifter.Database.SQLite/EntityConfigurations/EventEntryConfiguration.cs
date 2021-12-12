@@ -1,4 +1,4 @@
-﻿using Christmas.Secret.Gifter.Database.SQLite.Entities;
+﻿using Christmas.Secret.Gifter.Database.SQLite.Entries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,13 +12,9 @@ namespace Christmas.Secret.Gifter.Database.SQLite.SQLite.Database.Configuration
             builder.Property(p => p.Id)
                 .ValueGeneratedOnAdd();
 
-            //builder.HasMany(dm => dm.TranslatableDetails)
-            //    .WithOne(p => p.Category)
-            //    .OnDelete(DeleteBehavior.Cascade);
-
-            //builder.HasData(
-            //        new CategoryEntry { Id = Guid.NewGuid().ToString(), Name = "ALL" }
-            //    );
+            builder.HasMany(dm => dm.Participants)
+                .WithOne(p => p.Parent)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

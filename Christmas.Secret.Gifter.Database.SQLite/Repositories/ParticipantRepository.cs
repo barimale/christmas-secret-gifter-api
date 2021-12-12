@@ -6,14 +6,14 @@ using Microsoft.Extensions.Logging;
 
 namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
 {
-    internal class EventRepository : IEventRepository
+    public class ParticipantRepository : IParticipantRepository
     {
         private readonly IMapper _mapper;
         private readonly GifterDbContext _context;
-        private readonly ILogger<EventRepository> _logger;
+        private readonly ILogger<ParticipantRepository> _logger;
 
-        public EventRepository(
-            ILogger<EventRepository> logger,
+        public ParticipantRepository(
+            ILogger<ParticipantRepository> logger,
             GifterDbContext context,
             IMapper mapper)
         {
@@ -22,22 +22,19 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
             _mapper = mapper;
         }
 
-        public async Task<EventEntry> AddAsync(EventEntry item, CancellationToken cancellationToken)
+        public async Task<ParticipantEntry> AddAsync(ParticipantEntry item, CancellationToken cancellationToken)
         {
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var mapped = _mapper.Map<EventEntry>(item);
                 var result = await _context
-                    .Events
-                    .AddAsync(mapped, cancellationToken);
+                    .Participants
+                    .AddAsync(item, cancellationToken);
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                var mappedResult = _mapper.Map<EventEntry>(result.Entity);
-
-                return mappedResult;
+                return result.Entity;
             }
             catch (Exception ex)
             {
@@ -46,15 +43,14 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
             }
         }
 
-        public async Task<EventEntry> UpdateAsync(EventEntry item, CancellationToken cancellationToken)
+        public async Task<ParticipantEntry> UpdateAsync(ParticipantEntry item, CancellationToken cancellationToken)
         {
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var existed = await _context
-                   .Events
-                   .Include(p => p.Participants)
+                   .Participants
                    .AsQueryable()
                    .FirstOrDefaultAsync(p => p.Id == item.Id, cancellationToken);
 
@@ -63,7 +59,7 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
                     throw new Exception("Entity not found");
                 }
 
-                var mapped = _mapper.Map(item, existed);
+                var mapped = _mapper.Map<ParticipantEntry, ParticipantEntry>(item, existed);
                 var result = _context.Update(mapped);
 
                 await _context.SaveChangesAsync(cancellationToken);
@@ -84,11 +80,11 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var existed = await _context
-                    .Events
-                    .FirstOrDefaultAsync(p => p.EventId == id, cancellationToken);
+                    .Participants
+                    .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
 
                 var deleted = _context
-                    .Events
+                    .Participants
                     .Remove(existed);
 
                 var result = await _context.SaveChangesAsync(cancellationToken);
@@ -102,24 +98,23 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
             }
         }
 
-        public async Task<EventEntry> GetByIdAsync(string id, CancellationToken cancellationToken)
+        public async Task<ParticipantEntry> GetByIdAsync(string id, CancellationToken cancellationToken)
         {
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var found = await _context
-                    .Events
-                    .Include(p => p.Participants)
+                    .Participants
                     .AsQueryable()
-                    .FirstOrDefaultAsync(p => p.EventId == id, cancellationToken);
+                    .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
 
                 if (found == null)
                 {
                     return null;
                 }
 
-                var mappedResult = _mapper.Map<EventEntry>(found);
+                var mappedResult = _mapper.Map<ParticipantEntry>(found);
 
                 return mappedResult;
             }
@@ -131,18 +126,17 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
             return null;
         }
 
-        public async Task<EventEntry[]> GetAllAsync(CancellationToken? cancellationToken)
+        public async Task<ParticipantEntry[]> GetAllAsync(CancellationToken? cancellationToken)
         {
             try
             {
                 cancellationToken?.ThrowIfCancellationRequested();
 
                 var allOfThem = await _context
-                    .Events
-                    .Include(p => p.Participants)
+                    .Participants
                     .ToArrayAsync(cancellationToken ?? default);
 
-                var mapped = allOfThem.Select(p => _mapper.Map<EventEntry>(p));
+                var mapped = allOfThem.Select(p => _mapper.Map<ParticipantEntry>(p));
 
                 return mapped.ToArray();
             }
@@ -151,7 +145,7 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
                 _logger.LogError(ex.Message);
             }
 
-            return new EventEntry[0];
+            return null;
         }
     }
 }

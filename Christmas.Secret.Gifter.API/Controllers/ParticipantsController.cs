@@ -1,5 +1,4 @@
-﻿using Algorithm.ConstraintsPairing.Model.Requests;
-using Christmas.Secret.Gifter.Domain;
+﻿using Christmas.Secret.Gifter.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -48,7 +47,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetById(
             string eventId,
-            int id,
+            string id,
             CancellationToken cancellationToken)
         {
             try
