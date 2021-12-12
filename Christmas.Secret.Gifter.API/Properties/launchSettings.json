@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Albergue.Administrator": {
+    "Christmas.Secret.Gifter.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
@@ -9,7 +9,7 @@
       "applicationUrl": "http://localhost:5020",
       "dotnetRunMessages": "true"
     },
-    "Albergue.Administrator.DEV": {
+    "Christmas.Secret.Gifter.API.DEV": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
