@@ -21,5 +21,7 @@
   },
   "buildProject": false,
   "useDefaultExport": true,
-  "outputPath": "../../Christmas-Secret-Gifter/src/store/model"
+  "singleQuotes": true,
+  "outputPath": "../../Christmas-Secret-Gifter/src/store/model",
+  "fileHeading": "/* eslint-disable no-unused-vars */\n\n/**\n  * This is a TypeGen auto-generated file.\n  * Any changes made to this file can be lost when this file is regenerated.\n  **/\n\n"
 }
