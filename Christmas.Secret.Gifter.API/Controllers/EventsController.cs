@@ -88,7 +88,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
 
                 var existed = await _eventService.GetByIdAsync(id, cancellationToken);
 
-                if(existed == null)
+                if (existed == null)
                 {
                     return NotFound();
                 }

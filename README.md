@@ -20,6 +20,15 @@ sudo sudo journalctl -fu albergue-administrator.service
 
 https://localhost:5021;
 
+# Format and lint
+```
+dotnet tool install -g dotnet-format
+```
+Usage:
+```
+dotnet-format .\Christmas.Secret.Gifter.API\
+```
+
 # TypeGen
 Install:
 ```

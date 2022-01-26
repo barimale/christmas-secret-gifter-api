@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Christmas.Secret.Gifter.API.Services
 {
-    public class EventService: IEventService
+    public class EventService : IEventService
     {
         private readonly ILogger<EventService> _logger;
         private readonly Engine _engine;
@@ -44,7 +44,7 @@ namespace Christmas.Secret.Gifter.API.Services
         {
             try
             {
-                if(eventId == null)
+                if (eventId == null)
                 {
                     throw new System.Exception("EventId is not provided. Create the new event first.");
                 }
