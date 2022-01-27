@@ -5,7 +5,6 @@
         where U : class
     {
         Task<int> DeleteAsync(U id, CancellationToken cancellationToken);
-        Task<T[]> GetAllAsync(CancellationToken? cancellationToken = null);
         Task<T> UpdateAsync(T item, CancellationToken cancellationToken);
     }
 }

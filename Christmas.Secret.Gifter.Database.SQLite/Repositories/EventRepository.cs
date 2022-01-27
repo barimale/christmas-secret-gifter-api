@@ -130,28 +130,5 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
 
             return null;
         }
-
-        public async Task<EventEntry[]> GetAllAsync(CancellationToken? cancellationToken)
-        {
-            try
-            {
-                cancellationToken?.ThrowIfCancellationRequested();
-
-                var allOfThem = await _context
-                    .Events
-                    .Include(p => p.Participants)
-                    .ToArrayAsync(cancellationToken ?? default);
-
-                var mapped = allOfThem.Select(p => _mapper.Map<EventEntry>(p));
-
-                return mapped.ToArray();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-            }
-
-            return new EventEntry[0];
-        }
     }
 }

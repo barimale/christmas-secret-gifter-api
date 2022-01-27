@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Christmas.Secret.Gifter.API.Services.Abstractions;
+﻿using Christmas.Secret.Gifter.API.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,17 +15,14 @@ namespace Christmas.Secret.Gifter.API.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
-        private readonly IMapper _mapper;
         private readonly IEventService _eventService;
         private readonly ILogger<EventsController> _logger;
 
         public EventsController(
             ILogger<EventsController> logger,
-            IMapper mapper,
             IEventService eventService)
         {
             _logger = logger;
-            _mapper = mapper;
             _eventService = eventService;
         }
 

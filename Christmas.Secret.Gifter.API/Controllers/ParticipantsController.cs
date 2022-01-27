@@ -1,4 +1,5 @@
-﻿using Christmas.Secret.Gifter.Domain;
+﻿using Christmas.Secret.Gifter.API.Services.Abstractions;
+using Christmas.Secret.Gifter.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,11 +17,18 @@ namespace Christmas.Secret.Gifter.API.Controllers
     [ApiController]
     public class ParticipantsController : ControllerBase
     {
+        private readonly IParticipantService _participantService;
+        private readonly IEventService _eventService;
         private readonly ILogger<ParticipantsController> _logger;
 
-        public ParticipantsController(ILogger<ParticipantsController> logger)
+        public ParticipantsController(
+            ILogger<ParticipantsController> logger,
+            IParticipantService participantService,
+            IEventService eventService)
         {
             _logger = logger;
+            _participantService = participantService;
+            _eventService = eventService;
         }
 
         [HttpPost("events/{eventId}/[controller]/register")]
@@ -33,7 +41,18 @@ namespace Christmas.Secret.Gifter.API.Controllers
         {
             try
             {
-                return Ok(new Participant());
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var existedEvent = await _eventService.GetByIdAsync(eventId, cancellationToken);
+
+                if (existedEvent == null)
+                {
+                    return NotFound("Event with such id not registered.");
+                }
+
+                var created = await _participantService.AddAsync(input, cancellationToken);
+
+                return Ok(created);
             }
             catch (Exception ex)
             {
@@ -53,7 +72,23 @@ namespace Christmas.Secret.Gifter.API.Controllers
         {
             try
             {
-                return Ok(new Participant());
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var existedEvent = await _eventService.GetByIdAsync(eventId, cancellationToken);
+
+                if (existedEvent == null)
+                {
+                    return NotFound("Event with such id not registered.");
+                }
+
+                var existed = await _participantService.GetByIdAsync(id, cancellationToken);
+
+                if (existed == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(existed);
             }
             catch (Exception ex)
             {
@@ -72,6 +107,22 @@ namespace Christmas.Secret.Gifter.API.Controllers
         {
             try
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var existedEvent = await _eventService.GetByIdAsync(eventId, cancellationToken);
+
+                if (existedEvent == null)
+                {
+                    return NotFound("Event with such id not registered.");
+                }
+
+                var existed = await _participantService.GetAllAsync(eventId, cancellationToken);
+
+                if (existed == null)
+                {
+                    return NotFound();
+                }
+
                 return Ok(new List<Participant>());
             }
             catch (Exception ex)

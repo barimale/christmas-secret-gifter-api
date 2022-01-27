@@ -39,6 +39,7 @@ namespace Albergue.Administrator
             services.AddScoped<ILocalesGenerator, LocalesGenerator>();
             services.AddScoped<IAuthorizeService, AuthorizeService>();
             services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IParticipantService, ParticipantService>();
 
             services.AddSQLLiteDatabase();
 

@@ -126,7 +126,7 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
             return null;
         }
 
-        public async Task<ParticipantEntry[]> GetAllAsync(CancellationToken? cancellationToken)
+        public async Task<ParticipantEntry[]> GetAllAsync(string eventId, CancellationToken? cancellationToken)
         {
             try
             {
@@ -134,6 +134,8 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
 
                 var allOfThem = await _context
                     .Participants
+                    .Include(p => p.Parent)
+                    .Where(p => p.Parent.EventId == eventId)
                     .ToArrayAsync(cancellationToken ?? default);
 
                 var mapped = allOfThem.Select(p => _mapper.Map<ParticipantEntry>(p));
