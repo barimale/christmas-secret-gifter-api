@@ -13,7 +13,7 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Entries
         [Column(TypeName = "nvarchar(2400)")]
         public int[] ExcludedOrderIds { get; set; }
 
-        public int ParentId { get; set; }
-        public EventEntry Parent { get; set; }
+        public string EventId { get; set; }
+        public EventEntry Event { get; set; }
     }
 }

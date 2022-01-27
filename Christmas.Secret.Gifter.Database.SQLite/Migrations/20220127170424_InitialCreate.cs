@@ -52,8 +52,7 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Migrations
                 name: "Events",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
                     EventId = table.Column<string>(type: "TEXT", nullable: false),
                     OrganizerId = table.Column<int>(type: "INTEGER", nullable: false),
                     State = table.Column<int>(type: "INTEGER", nullable: false)
@@ -178,14 +177,14 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
                     ExcludedOrderIds = table.Column<string>(type: "nvarchar(2400)", nullable: false),
-                    ParentId = table.Column<int>(type: "INTEGER", nullable: false)
+                    EventId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Participants", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Participants_Events_ParentId",
-                        column: x => x.ParentId,
+                        name: "FK_Participants_Events_EventId",
+                        column: x => x.EventId,
                         principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -194,7 +193,7 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "93c2c598-0c98-4103-b7aa-0b595e7433bd", 0, "be74ddc7-f863-4e53-b6c2-f5fa9e48ec43", "mateusz.wolnica@gmail.com", true, false, null, "MATEUSZ.WOLNICA@GMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEKWtX7dfyarOu9MQ0ChG04dh2NbNIBDVUew11SjLb+fmDY/WrAmSXC2RQia219MVLQ==", "0048665337563", true, "00000000-0000-0000-0000-000000000000", false, "Admin" });
+                values: new object[] { "83f3c338-3cdf-470b-bc83-e84d37fcda76", 0, "4b5dc621-3040-491a-b7ab-fa976b522e76", "mateusz.wolnica@gmail.com", true, false, null, "MATEUSZ.WOLNICA@GMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEDJohr6YAx2/xr31MWn4rik+L/qCD5HtMqeMxFPyFhcIgBJjP7WPqlx/jv7pFEb0+g==", "0048665337563", true, "00000000-0000-0000-0000-000000000000", false, "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -234,9 +233,9 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Participants_ParentId",
+                name: "IX_Participants_EventId",
                 table: "Participants",
-                column: "ParentId");
+                column: "EventId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

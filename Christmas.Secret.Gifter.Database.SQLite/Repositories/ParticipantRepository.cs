@@ -28,13 +28,19 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var result = await _context
-                    .Participants
-                    .AddAsync(item, cancellationToken);
+                var existedEvent = await _context.Events.FirstOrDefaultAsync(p => p.EventId == item.EventId, cancellationToken);
+                if (existedEvent == null)
+                {
+                    throw new SystemException("Event not found");
+                }
+
+                item.EventId = existedEvent.Id;
+
+                var added = await _context.Participants.AddAsync(item, cancellationToken);
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                return result.Entity;
+                return added.Entity;
             }
             catch (Exception ex)
             {
@@ -134,8 +140,8 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
 
                 var allOfThem = await _context
                     .Participants
-                    .Include(p => p.Parent)
-                    .Where(p => p.Parent.EventId == eventId)
+                    .Include(p => p.Event)
+                    .Where(p => p.EventId == eventId)
                     .ToArrayAsync(cancellationToken ?? default);
 
                 var mapped = allOfThem.Select(p => _mapper.Map<ParticipantEntry>(p));

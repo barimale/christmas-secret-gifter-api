@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Christmas.Secret.Gifter.Database.SQLite.Migrations
 {
     [DbContext(typeof(GifterDbContext))]
-    [Migration("20211212204013_InitialCreate")]
+    [Migration("20220127170424_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,9 +21,9 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Migrations
 
             modelBuilder.Entity("Christmas.Secret.Gifter.Database.SQLite.Entries.EventEntry", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("EventId")
                         .IsRequired()
@@ -50,6 +50,10 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("EventId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ExcludedOrderIds")
                         .IsRequired()
                         .HasColumnType("nvarchar(2400)");
@@ -61,12 +65,9 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ParentId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentId");
+                    b.HasIndex("EventId");
 
                     b.ToTable("Participants");
                 });
@@ -186,15 +187,15 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "93c2c598-0c98-4103-b7aa-0b595e7433bd",
+                            Id = "83f3c338-3cdf-470b-bc83-e84d37fcda76",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "be74ddc7-f863-4e53-b6c2-f5fa9e48ec43",
+                            ConcurrencyStamp = "4b5dc621-3040-491a-b7ab-fa976b522e76",
                             Email = "mateusz.wolnica@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MATEUSZ.WOLNICA@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKWtX7dfyarOu9MQ0ChG04dh2NbNIBDVUew11SjLb+fmDY/WrAmSXC2RQia219MVLQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDJohr6YAx2/xr31MWn4rik+L/qCD5HtMqeMxFPyFhcIgBJjP7WPqlx/jv7pFEb0+g==",
                             PhoneNumber = "0048665337563",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "00000000-0000-0000-0000-000000000000",
@@ -284,13 +285,13 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Migrations
 
             modelBuilder.Entity("Christmas.Secret.Gifter.Database.SQLite.Entries.ParticipantEntry", b =>
                 {
-                    b.HasOne("Christmas.Secret.Gifter.Database.SQLite.Entries.EventEntry", "Parent")
+                    b.HasOne("Christmas.Secret.Gifter.Database.SQLite.Entries.EventEntry", "Event")
                         .WithMany("Participants")
-                        .HasForeignKey("ParentId")
+                        .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Parent");
+                    b.Navigation("Event");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -11,10 +11,6 @@ namespace Christmas.Secret.Gifter.Database.SQLite.SQLite.Database.Configuration
             builder.HasKey(o => o.Id);
             builder.Property(p => p.Id)
                 .ValueGeneratedOnAdd();
-
-            builder.HasMany(dm => dm.Participants)
-                .WithOne(p => p.Parent)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

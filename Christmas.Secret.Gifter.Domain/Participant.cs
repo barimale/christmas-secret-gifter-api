@@ -9,6 +9,7 @@ namespace Christmas.Secret.Gifter.Domain
         public int OrderId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+        public string EventId { get; set; }
         public IEnumerable<int> ExcludedOrderIds { get; set; }
         public int[] ToInputDataRow(int amountOfParticipants)
         {

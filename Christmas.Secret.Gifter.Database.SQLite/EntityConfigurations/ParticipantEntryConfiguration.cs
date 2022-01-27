@@ -18,6 +18,12 @@ namespace Christmas.Secret.Gifter.Database.SQLite.SQLite.Database.Configuration
                 .ValueGeneratedOnAdd();
 
             builder
+                .HasOne(p => p.Event)
+                .WithMany(pp => pp.Participants)
+                .HasForeignKey(ppp => ppp.EventId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder
                 .Property(p => p.ExcludedOrderIds)
                 .HasConversion(converter);
         }

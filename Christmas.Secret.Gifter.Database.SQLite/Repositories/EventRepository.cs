@@ -28,10 +28,9 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var mapped = _mapper.Map<EventEntry>(item);
                 var result = await _context
                     .Events
-                    .AddAsync(mapped, cancellationToken);
+                    .AddAsync(item, cancellationToken);
 
                 await _context.SaveChangesAsync(cancellationToken);
 
