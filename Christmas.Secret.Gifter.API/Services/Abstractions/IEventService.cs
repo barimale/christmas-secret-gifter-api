@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Christmas.Secret.Gifter.API.Services.Abstractions
 {
-    public interface IEventService : IBaseRepositoryOuterScope<Event, string>
+    public interface IEventService : IBaseRepositoryOuterScope<GiftEvent, string>
     {
-        Task<Event> ExecuteAsync(string eventId, CancellationToken cancellationToken = default);
+        Task<GiftEvent> ExecuteAsync(string eventId, CancellationToken cancellationToken = default);
     }
 }

@@ -3,7 +3,7 @@
 namespace Christmas.Secret.Gifter.Domain
 {
     [ExportTsInterface]
-    public class Event
+    public class GiftEvent
     {
         public string EventId { get; set; } = null!;
         public int OrginizerId { get; set; }

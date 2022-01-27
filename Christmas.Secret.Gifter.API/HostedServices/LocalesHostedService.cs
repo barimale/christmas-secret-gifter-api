@@ -41,7 +41,7 @@ namespace Christmas.Secret.Gifter.API.HostedServices
             _logger.LogInformation("Locales Hosted Service running.");
 
             //WIP check it later
-            _hub.Subscribe<Event>(async (item) =>
+            _hub.Subscribe<GiftEvent>(async (item) =>
             {
                 await DoWorkAsync();
             });

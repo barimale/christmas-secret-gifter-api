@@ -25,19 +25,19 @@ namespace Christmas.Secret.Gifter.API.Services
             _mapper = mapper;
         }
 
-        public async Task<Event> AddAsync(Event item, CancellationToken cancellationToken)
+        public async Task<GiftEvent> AddAsync(GiftEvent item, CancellationToken cancellationToken)
         {
             var mapped = _mapper.Map<EventEntry>(item);
             var added = await _eventRepoistory.AddAsync(mapped, cancellationToken);
 
-            return _mapper.Map<Event>(added);
+            return _mapper.Map<GiftEvent>(added);
         }
 
-        public async Task<Event> GetByIdAsync(string id, CancellationToken cancellationToken)
+        public async Task<GiftEvent> GetByIdAsync(string id, CancellationToken cancellationToken)
         {
             var found = await _eventRepoistory.GetByIdAsync(id, cancellationToken);
 
-            return _mapper.Map<Event>(found);
+            return _mapper.Map<GiftEvent>(found);
         }
 
         public async Task ExecuteAsync(string eventId = null, CancellationToken cancellationToken = default)
@@ -87,7 +87,7 @@ namespace Christmas.Secret.Gifter.API.Services
             }
         }
 
-        Task<Event> IEventService.ExecuteAsync(string eventId, CancellationToken cancellationToken)
+        Task<GiftEvent> IEventService.ExecuteAsync(string eventId, CancellationToken cancellationToken)
         {
             throw new System.NotImplementedException();
         }

@@ -1,3 +1,9 @@
+using Christmas.Secret.Gifter.API.HostedServices;
+using Christmas.Secret.Gifter.API.HostedServices.Hub;
+using Christmas.Secret.Gifter.API.Services;
+using Christmas.Secret.Gifter.API.Services.Abstractions;
+using Christmas.Secret.Gifter.Database.SQLite;
+using Christmas.Secret.Gifter.Database.SQLite.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,16 +15,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System;
-using Christmas.Secret.Gifter.Database.SQLite;
-using Christmas.Secret.Gifter.Database.SQLite.Extensions;
-using Christmas.Secret.Gifter.API.HostedServices.Hub;
-using Christmas.Secret.Gifter.API.HostedServices;
-using Christmas.Secret.Gifter.API.Services;
-using Christmas.Secret.Gifter.API.Services.Abstractions;
 
 namespace Albergue.Administrator
 {
@@ -123,7 +123,7 @@ namespace Albergue.Administrator
             }
 
             app.UseRouting();
-            //app.UseHsts();
+            app.UseHsts();
 
             app.UseCors(p =>
             {

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -23,16 +24,16 @@ namespace Christmas.Secret.Gifter.API.Controllers
         }
 
         [HttpPost("events/{eventId}/[controller]/register")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Participant[]))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Participant))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Register(
             string eventId,
-            [FromBody] Participant[] input,
+            [FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] Participant input,
             CancellationToken cancellationToken)
         {
             try
             {
-                return Ok(new List<Participant>().ToArray());
+                return Ok(new Participant());
             }
             catch (Exception ex)
             {
@@ -53,6 +54,25 @@ namespace Christmas.Secret.Gifter.API.Controllers
             try
             {
                 return Ok(new Participant());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("events/{eventId}/[controller]/all")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Participant[]))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> GetAll(
+            string eventId,
+            CancellationToken cancellationToken)
+        {
+            try
+            {
+                return Ok(new List<Participant>());
             }
             catch (Exception ex)
             {

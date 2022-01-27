@@ -4,6 +4,7 @@ using Algorithm.ConstraintsPairing.Model.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
@@ -33,7 +34,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AlgorithmResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> Analyze([FromBody] AlgorithmRequest input, CancellationToken cancellationToken)
+        public async Task<ActionResult> Analyze([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] AlgorithmRequest input, CancellationToken cancellationToken)
         {
             try
             {

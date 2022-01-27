@@ -30,8 +30,8 @@ namespace Christmas.Secret.Gifter.API.Controllers
             _eventService = eventService;
         }
 
-        [HttpPost("[controller]/[action]")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Event))]
+        [HttpPost("create")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GiftEvent))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Create(CancellationToken cancellationToken)
         {
@@ -39,7 +39,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var newEvent = new Event()
+                var newEvent = new GiftEvent()
                 {
                     EventId = Guid.NewGuid().ToString()
                 };
@@ -56,8 +56,8 @@ namespace Christmas.Secret.Gifter.API.Controllers
             }
         }
 
-        [HttpPost("[controller]/{eventId}/execute")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Event))]
+        [HttpPost("{eventId}/execute")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GiftEvent))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Execute(string eventId, CancellationToken cancellationToken)
         {
@@ -78,7 +78,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Event))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GiftEvent))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> GetById(string id, CancellationToken cancellationToken)
         {
