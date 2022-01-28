@@ -84,7 +84,7 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
 
                 var existed = await _context
                     .Events
-                    .FirstOrDefaultAsync(p => p.EventId == id, cancellationToken);
+                    .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
 
                 var deleted = _context
                     .Events
@@ -111,7 +111,7 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
                     .Events
                     .Include(p => p.Participants)
                     .AsQueryable()
-                    .FirstOrDefaultAsync(p => p.EventId == id, cancellationToken);
+                    .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
 
                 if (found == null)
                 {
