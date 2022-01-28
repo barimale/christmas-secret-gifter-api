@@ -66,6 +66,15 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
                 }
 
                 var mapped = _mapper.Map<ParticipantEntry, ParticipantEntry>(item, existed);
+
+                var existedEvent = await _context.Events.FirstOrDefaultAsync(p => p.Id == item.EventId, cancellationToken);
+                if (existedEvent == null)
+                {
+                    throw new SystemException("Event not found");
+                }
+
+                mapped.EventId = existedEvent.Id;
+
                 var result = _context.Update(mapped);
 
                 await _context.SaveChangesAsync(cancellationToken);
@@ -141,7 +150,7 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
                 var allOfThem = await _context
                     .Participants
                     .Include(p => p.Event)
-                    .Where(p => p.EventId == eventId)
+                    .Where(p => p.Event.EventId == eventId)
                     .ToArrayAsync(cancellationToken ?? default);
 
                 var mapped = allOfThem.Select(p => _mapper.Map<ParticipantEntry>(p));

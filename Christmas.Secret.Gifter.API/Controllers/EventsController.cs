@@ -1,4 +1,5 @@
-﻿using Christmas.Secret.Gifter.API.Services.Abstractions;
+﻿using Algorithm.ConstraintsPairing.Model.Responses;
+using Christmas.Secret.Gifter.API.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -53,7 +54,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
         }
 
         [HttpPost("{eventId}/execute")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GiftEvent))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AlgorithmResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Execute(string eventId, CancellationToken cancellationToken)
         {
@@ -61,7 +62,14 @@ namespace Christmas.Secret.Gifter.API.Controllers
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var result = await _eventService.ExecuteAsync(eventId, cancellationToken);
+                var existed = await _eventService.GetByIdAsync(eventId, cancellationToken);
+
+                if (existed == null)
+                {
+                    return NotFound();
+                }
+
+                var result = await _eventService.ExecuteAsync(existed, cancellationToken);
 
                 return Ok(result);
             }

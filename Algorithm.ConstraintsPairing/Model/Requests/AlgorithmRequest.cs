@@ -20,8 +20,9 @@ namespace Algorithm.ConstraintsPairing.Model.Requests
                 }
             }
 
-            return new InputData() { 
-                Costs = costs 
+            return new InputData()
+            {
+                Costs = costs
             };
         }
     }

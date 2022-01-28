@@ -6,10 +6,15 @@
 
   <ItemGroup>
     <PackageReference Include="Google.OrTools" Version="9.1.9490" />
+    <PackageReference Include="TypeGen" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Christmas.Secret.Gifter.Domain\Christmas.Secret.Gifter.Domain.csproj" />
   </ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="dotnet-typegen --project-folder  . generate&#xD;&#xA;" />
+	</Target>
 
 </Project>

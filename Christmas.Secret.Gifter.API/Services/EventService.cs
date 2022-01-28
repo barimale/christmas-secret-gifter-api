@@ -1,10 +1,13 @@
 ﻿using Algorithm.ConstraintsPairing;
+using Algorithm.ConstraintsPairing.Model.Requests;
+using Algorithm.ConstraintsPairing.Model.Responses;
 using AutoMapper;
 using Christmas.Secret.Gifter.API.Services.Abstractions;
 using Christmas.Secret.Gifter.Database.SQLite.Entries;
 using Christmas.Secret.Gifter.Database.SQLite.Repositories.Abstractions;
 using Christmas.Secret.Gifter.Domain;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -40,56 +43,46 @@ namespace Christmas.Secret.Gifter.API.Services
             return _mapper.Map<GiftEvent>(found);
         }
 
-        public async Task ExecuteAsync(string eventId = null, CancellationToken cancellationToken = default)
+        public async Task<AlgorithmResponse> ExecuteAsync(GiftEvent existed, CancellationToken cancellationToken = default)
         {
             try
             {
-                if (eventId == null)
+                if (existed == null)
                 {
-                    throw new System.Exception("EventId is not provided. Create the new event first.");
+                    throw new System.Exception("Event not found. Create the new event first.");
                 }
-
-                var existed = await _eventRepoistory.GetByIdAsync(eventId, cancellationToken);
 
                 switch (existed.State)
                 {
                     case EventState.CREATED:
-                        return;
                     case EventState.READY_FOR_ANALYZE:
-                        //existed.State = EventState.ANALYZE_IN_PROGRESS;
-                        //await _eventRepoistory.UpdateAsync(existed, cancellationToken);
-                        //var inputData = _eventRepoistory
-                        //var result = await _engine.CalculateAsync(input.ToInputData());
-
-                        //return new AlgorithmResponse()
-                        //{
-                        //    IsError = result.IsError,
-                        //    Reason = result.Reason,
-                        //    Pairs = result.Data.Pairs,
-                        //    AnalysisStatus = result.Data.Status.ToString()
-                        //});
-                        return;
                     case EventState.ANALYZE_IN_PROGRESS:
-                        return;
                     case EventState.COMPLETED_SUCCESSFULLY:
-                        return;
                     case EventState.COMPLETED_FAILY:
-                        return;
                     case EventState.ABANDONED:
-                        return;
                     default:
-                        return;
+                        var request = new AlgorithmRequest()
+                        {
+                            Data = existed.Participants.ToList()
+                        };
+
+                        var result = await _engine.CalculateAsync(request.ToInputData());
+
+                        return new AlgorithmResponse()
+                        {
+                            IsError = result.IsError,
+                            Reason = result.Reason,
+                            Pairs = result.Data.Pairs,
+                            AnalysisStatus = result.Data.Status.ToString()
+                        };
                 }
             }
             catch (System.Exception ex)
             {
                 _logger.LogError(ex.Message);
             }
-        }
 
-        Task<GiftEvent> IEventService.ExecuteAsync(string eventId, CancellationToken cancellationToken)
-        {
-            throw new System.NotImplementedException();
+            return null;
         }
     }
 }

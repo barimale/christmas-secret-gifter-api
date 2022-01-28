@@ -4,13 +4,14 @@
     {
         private int[,] costs;
 
-        public int[,] Costs {
-            get 
-            { 
+        public int[,] Costs
+        {
+            get
+            {
                 return costs;
             }
             set
-            { 
+            {
                 costs = value;
             }
         }

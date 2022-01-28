@@ -13,8 +13,8 @@ namespace Algorithm.ConstraintsPairing
 
         public Variable[,] Variables
         {
-            get 
-            { 
+            get
+            {
                 return variables;
             }
             set
