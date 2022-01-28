@@ -36,10 +36,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var newEvent = new GiftEvent()
-                {
-                    EventId = Guid.NewGuid().ToString()
-                };
+                var newEvent = new GiftEvent();
 
                 var created = await _eventService.AddAsync(newEvent, cancellationToken);
 
