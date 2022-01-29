@@ -16,7 +16,7 @@ namespace Algorithm.ConstraintsPairing.Model.Requests
                 var row = Data[i].ToInputDataRow(Data.Count);
                 for (int j = 0; j < row.Length; j++)
                 {
-                    costs[i, j] = row[j];
+                    costs[i, j] = row[j].value;
                 }
             }
 

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -185,14 +186,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
                     return NotFound("Event with such id not registered.");
                 }
 
-                var existed = await _participantService.GetAllAsync(eventId, cancellationToken);
-
-                if (existed == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(existed);
+                return Ok(existedEvent.Participants.ToArray());
             }
             catch (Exception ex)
             {

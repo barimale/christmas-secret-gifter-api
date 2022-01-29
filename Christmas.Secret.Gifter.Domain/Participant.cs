@@ -11,27 +11,34 @@ namespace Christmas.Secret.Gifter.Domain
         public string Email { get; set; }
         public string EventId { get; set; }
         public IEnumerable<int> ExcludedOrderIds { get; set; }
-        public int[] ToInputDataRow(int amountOfParticipants)
+        public Row[] ToInputDataRow(int amountOfParticipants)
         {
-            var row = new int[amountOfParticipants];
+            var row = new Row[amountOfParticipants];
 
-            for (int i = 0; i < amountOfParticipants; i++)
+            for (int i = 1; i <= amountOfParticipants; i++)
             {
                 if (i == OrderId)
                 {
-                    row[i] = -1;
+                    row[i - 1] = new Row() { arrayIndex = i, orderId = OrderId, value = -1 };
                 }
                 else if (ExcludedOrderIds.Contains(i))
                 {
-                    row[i] = 100;
+                    row[i - 1] = new Row() { arrayIndex = i, orderId = OrderId, value = 100 };
                 }
                 else
                 {
-                    row[i] = 0;
+                    row[i - 1] = new Row() { arrayIndex = i, orderId = OrderId, value = 0 };
                 }
             }
 
             return row;
+        }
+
+        public class Row
+        {
+            public int arrayIndex { get; set; }
+            public int orderId { get; set; }
+            public int value { get; set; }
         }
     }
 }
