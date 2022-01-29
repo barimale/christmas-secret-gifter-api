@@ -13,7 +13,7 @@
     <ProjectReference Include="..\Christmas.Secret.Gifter.Domain\Christmas.Secret.Gifter.Domain.csproj" />
   </ItemGroup>
 
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Debug'">
 		<Exec Command="dotnet-typegen --project-folder  . generate&#xD;&#xA;" />
 	</Target>
 
