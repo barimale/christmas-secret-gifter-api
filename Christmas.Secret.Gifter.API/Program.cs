@@ -16,12 +16,8 @@ namespace Christmas.Secret.Gifter.API
                 {
                     webBuilder
                     .UseKestrel()
-                    .UseStartup<Startup>()
-                    .UseUrls("http://[::];http://+:80"); //WIP
-                })
-                .ConfigureServices(services =>
-                {
-                    //services.AddHostedService<TimedHostedService>();
+                    .UseStartup<Startup>();
+                    //.UseUrls("http://[::];http://+:80;https://+:443"); //WIP
                 });
     }
 }
