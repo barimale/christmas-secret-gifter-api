@@ -39,7 +39,20 @@ namespace Christmas.Secret.Gifter.API.Services
 
         public async Task<int> DeleteAsync(string id, CancellationToken cancellationToken)
         {
+            var found = await _participantRepoistory.GetByIdAsync(id, cancellationToken);
+            var toReorder = found.Event.Participants.Where(p => p.Id != id);
+
             var deleted = await _participantRepoistory.DeleteAsync(id, cancellationToken);
+
+            int i = 1;
+            foreach (var existed in toReorder)
+            {
+                var modified = existed.ExcludedOrderIds.Where(p => p != existed.OrderId).ToArray();
+                existed.ExcludedOrderIds = modified.Append(i).ToArray();
+                existed.OrderId = i;
+                await _participantRepoistory.UpdateAsync(existed, cancellationToken);
+                i = i + 1;
+            }
 
             return deleted;
         }

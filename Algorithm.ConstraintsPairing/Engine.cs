@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Algorithm.ConstraintsPairing
 {
-    public class Engine
+    public sealed class Engine : CreateObjectiveFunctionStep
     {
-        private Solver _solver;
-
         public Engine()
             : this("SCIP")
         {
@@ -17,18 +15,16 @@ namespace Algorithm.ConstraintsPairing
         }
 
         public Engine(string solverType)
+            : base(solverType)
         {
-            _solver = Solver.CreateSolver(solverType);
+            // intentionally left blank
         }
 
         public async Task<OutputDataSummary> CalculateAsync(InputData input)
         {
             try
             {
-                var variables = CreateVariables(input);
-                
-                CreateConstraints(input, variables);
-                CreateObjectiveFunction(input, variables);
+                await base.Initialize(input);
 
                 Solver.ResultStatus resultStatus = _solver.Solve();
 
@@ -39,9 +35,9 @@ namespace Algorithm.ConstraintsPairing
                     Data = new OutputData()
                     {
                         Status = resultStatus,
-                        Variables = variables,
+                        Variables = Variables,
                         Input = input,
-                        Pairs = ToPairs(resultStatus, variables, input.GifterAmount)
+                        Pairs = ToPairs(resultStatus, Variables, input.GifterAmount)
                     }
                 };
             }
@@ -84,80 +80,6 @@ namespace Algorithm.ConstraintsPairing
             }
 
             return result.ToArray();
-        }
-
-        private Variable[,] CreateVariables(InputData input)
-        {
-            Variable[,] x = new Variable[input.GifterAmount, input.GifterAmount];
-            for (int i = 0; i < input.GifterAmount; ++i)
-            {
-                for (int j = 0; j < input.GifterAmount; ++j)
-                {
-                    if(i == j)
-                    {
-                        x[i, j] = _solver.MakeIntVar(0, 0, $"No assignment to yourself");
-                    } else if(input.Costs[i,j] == 100)
-                    {
-                        x[i, j] = _solver.MakeIntVar(0, 0, $"No assignment when the participant is excluded");
-                    }
-                    else
-                    {
-                        x[i, j] = _solver.MakeIntVar(0, 1, $"gifter_{i}_participant_{j}");
-                    }
-                }
-            }
-
-            return x;
-        }
-
-        private void CreateConstraints(InputData input, Variable[,] variables)
-        {
-            try
-            {
-                for (int i = 0; i < input.GifterAmount; ++i)
-                {
-                    Constraint constraint1 = _solver.MakeConstraint(0, 1, "");
-                    for (int j = 0; j < input.GifterAmount; ++j)
-                    {
-                        constraint1.SetCoefficient(variables[i, j], 1);
-                    }
-                }
-
-                for (int j = 0; j < input.GifterAmount; ++j)
-                {
-                    Constraint constraint2 = _solver.MakeConstraint(1, 1, "");
-                    for (int i = 0; i < input.GifterAmount; ++i)
-                    {
-                        constraint2.SetCoefficient(variables[i, j], 1);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private void CreateObjectiveFunction(InputData input, Variable[,] variables)
-        {
-            try
-            {
-                Objective objective = _solver.Objective();
-
-                for (int i = 0; i < input.GifterAmount; ++i)
-                {
-                    for (int j = 0; j < input.GifterAmount; ++j)
-                    {
-                        objective.SetCoefficient(variables[i, j], input.Costs[i, j]);
-                    }
-                }
-
-                objective.SetMinimization();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
     }
 }
