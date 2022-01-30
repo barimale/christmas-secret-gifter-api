@@ -16,8 +16,8 @@ namespace Albergue.Administrator
                 {
                     webBuilder
                     .UseKestrel()
-                    .UseStartup<Startup>();
-                    //.UseUrls("http://[::]");
+                    .UseStartup<Startup>()
+                    .UseUrls("http://[::]"); //WIP
                 })
                 .ConfigureServices(services =>
                 {
