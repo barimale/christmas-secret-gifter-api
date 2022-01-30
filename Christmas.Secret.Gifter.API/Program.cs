@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Albergue.Administrator
+namespace Christmas.Secret.Gifter.API
 {
     public class Program
     {
@@ -17,7 +17,7 @@ namespace Albergue.Administrator
                     webBuilder
                     .UseKestrel()
                     .UseStartup<Startup>()
-                    .UseUrls("http://[::]"); //WIP
+                    .UseUrls("http://[::];http://+:80"); //WIP
                 })
                 .ConfigureServices(services =>
                 {

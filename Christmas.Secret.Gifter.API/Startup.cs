@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Albergue.Administrator
+namespace Christmas.Secret.Gifter.API
 {
     public class Startup
     {
@@ -111,7 +111,7 @@ namespace Albergue.Administrator
             {
                 dbContext.Database.Migrate();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 Console.WriteLine("On Migrate error");
             }
