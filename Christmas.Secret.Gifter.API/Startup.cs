@@ -42,7 +42,6 @@ namespace Christmas.Secret.Gifter.API
             services.AddScoped<IParticipantService, ParticipantService>();
 
             services.AddSQLLiteDatabase();
-
             services.AddCors();
 
             services.AddDbContext<GifterDbContext>(options =>

@@ -38,6 +38,8 @@ namespace Christmas.Secret.Gifter.API.Controllers
         {
             try
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 var result = await _engine.CalculateAsync(input.ToInputData());
 
                 return Ok(new AlgorithmResponse()
