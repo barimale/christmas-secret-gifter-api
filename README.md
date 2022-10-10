@@ -45,7 +45,7 @@ TypeScript Barrel Generator
 ```
 ## ESLint & Prettier - VS Code
 ```
-npm install -D eslint prettier eslint-config-prettier
+npm install -D eslint prettier eslint-config-prettier --force
 npx eslint --init
 ```
 
