@@ -43,6 +43,11 @@ dotnet-typegen --project-folder  ./Christmas.Secret.Gifter.Domain generate
 ```
 TypeScript Barrel Generator
 ```
+## Firebase setup
+Install firebaseCLI from the official website, then execute:
+```
+npm install -g firebase-tools
+```
 ## ESLint & Prettier - VS Code
 ```
 npm install -D eslint prettier eslint-config-prettier --force
