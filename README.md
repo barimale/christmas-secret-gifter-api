@@ -80,6 +80,11 @@ https://developers.google.com/optimization/assignment/assignment_example
 # Heroku deployment
 ## Prereqs
 ```
+heroku-cli
+docker
+```
+# First steps
+```
 choco install heroku-cli
 heroku login
 heroku container:login
@@ -92,16 +97,16 @@ Each time, you want to deploy the app to Heroku:
 ```
 heroku login
 heroku container:login
-heroku git:remote -a lit-spire-23553
-heroku stack:set container
-git push heroku main
+heroku container:push web -a lit-spire-23553
+heroku container:release web -a lit-spire-23553
 ```
 or:
 ```
 heroku login
 heroku container:login
-heroku container:push web -a lit-spire-23553
-heroku container:release web -a lit-spire-23553
+heroku git:remote -a lit-spire-23553
+heroku stack:set container
+git push heroku main
 ```
 In case of any error:
 ```
