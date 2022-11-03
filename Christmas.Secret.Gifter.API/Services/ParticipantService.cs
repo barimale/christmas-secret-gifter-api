@@ -44,9 +44,23 @@ namespace Christmas.Secret.Gifter.API.Services
             return result.HasValue && result.Value;
         }
 
+        public async Task<bool> CheckIfEmailAlreadyExistEditMode(string eventId, string participantId, string email, CancellationToken? cancellationToken = null)
+        {
+            var result = await _participantRepository.CheckIfEmailAlreadyExistEditMode(eventId, participantId, email, cancellationToken);
+
+            return result.HasValue && result.Value;
+        }
+
         public async Task<bool> CheckIfNameAlreadyExist(string eventId, string name, CancellationToken? cancellationToken = null)
         {
             var result = await _participantRepository.CheckIfNameAlreadyExist(eventId, name, cancellationToken);
+
+            return result.HasValue && result.Value;
+        }
+
+        public async Task<bool> CheckIfNameAlreadyExistEditMode(string eventId, string participantId, string name, CancellationToken? cancellationToken = null)
+        {
+            var result = await _participantRepository.CheckIfNameAlreadyExistEditMode(eventId, participantId, name, cancellationToken);
 
             return result.HasValue && result.Value;
         }

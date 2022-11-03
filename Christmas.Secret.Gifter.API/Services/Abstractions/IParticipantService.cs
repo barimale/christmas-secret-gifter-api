@@ -10,5 +10,7 @@ namespace Christmas.Secret.Gifter.API.Services.Abstractions
         Task<Participant[]> GetAllAsync(string eventId, CancellationToken? cancellationToken = null);
         Task<bool> CheckIfNameAlreadyExist(string eventId, string name, CancellationToken? cancellationToken = null);
         Task<bool> CheckIfEmailAlreadyExist(string eventId, string email, CancellationToken? cancellationToken = null);
+        Task<bool> CheckIfNameAlreadyExistEditMode(string eventId, string participantId, string name, CancellationToken? cancellationToken = null);
+        Task<bool> CheckIfEmailAlreadyExistEditMode(string eventId, string participantId, string email, CancellationToken? cancellationToken = null);
     }
 }
