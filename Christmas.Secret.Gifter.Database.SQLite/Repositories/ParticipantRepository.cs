@@ -3,6 +3,7 @@ using Christmas.Secret.Gifter.Database.SQLite.Entries;
 using Christmas.Secret.Gifter.Database.SQLite.Repositories.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Xml.Linq;
 
 namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
 {
@@ -154,6 +155,52 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
                 var mapped = allOfThem.Select(p => _mapper.Map<ParticipantEntry>(p));
 
                 return mapped.ToArray();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return null;
+        }
+
+        public async Task<bool?> CheckIfNameAlreadyExist(string eventId, string name, CancellationToken? cancellationToken = null)
+        {
+            try
+            {
+                cancellationToken?.ThrowIfCancellationRequested();
+
+                var count = await _context
+                    .Participants
+                    .Include(p => p.Event)
+                    .Where(pp => pp.EventId == eventId)
+                    .Where(p => p.Name == name)
+                    .CountAsync(cancellationToken ?? default);
+
+                return count > 0;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return null;
+        }
+
+        public async Task<bool?> CheckIfEmailAlreadyExist(string eventId, string email, CancellationToken? cancellationToken = null)
+        {
+            try
+            {
+                cancellationToken?.ThrowIfCancellationRequested();
+
+                var count = await _context
+                    .Participants
+                    .Include(p => p.Event)
+                    .Where(pp => pp.EventId == eventId)
+                    .Where(p => p.Email == email)
+                    .CountAsync(cancellationToken ?? default);
+
+                return count > 0;
             }
             catch (Exception ex)
             {

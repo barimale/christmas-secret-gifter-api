@@ -15,7 +15,7 @@ namespace Christmas.Secret.Gifter.API.Services
     {
         private readonly ILogger<ParticipantService> _logger;
         private readonly Engine _engine;
-        private readonly IParticipantRepository _participantRepoistory;
+        private readonly IParticipantRepository _participantRepository;
         private readonly IMapper _mapper;
 
         public ParticipantService(
@@ -25,24 +25,38 @@ namespace Christmas.Secret.Gifter.API.Services
         {
             _engine = new Engine();
             _logger = logger;
-            _participantRepoistory = participantRepoistory;
+            _participantRepository = participantRepoistory;
             _mapper = mapper;
         }
 
         public async Task<Participant> AddAsync(Participant item, CancellationToken cancellationToken)
         {
             var mapped = _mapper.Map<ParticipantEntry>(item);
-            var added = await _participantRepoistory.AddAsync(mapped, cancellationToken);
+            var added = await _participantRepository.AddAsync(mapped, cancellationToken);
 
             return _mapper.Map<Participant>(added);
         }
 
+        public async Task<bool> CheckIfEmailAlreadyExist(string eventId, string email, CancellationToken? cancellationToken = null)
+        {
+            var result = await _participantRepository.CheckIfEmailAlreadyExist(eventId, email, cancellationToken);
+
+            return result.HasValue && result.Value;
+        }
+
+        public async Task<bool> CheckIfNameAlreadyExist(string eventId, string name, CancellationToken? cancellationToken = null)
+        {
+            var result = await _participantRepository.CheckIfNameAlreadyExist(eventId, name, cancellationToken);
+
+            return result.HasValue && result.Value;
+        }
+
         public async Task<int> DeleteAsync(string id, CancellationToken cancellationToken)
         {
-            var found = await _participantRepoistory.GetByIdAsync(id, cancellationToken);
+            var found = await _participantRepository.GetByIdAsync(id, cancellationToken);
             var toReorder = found.Event.Participants.Where(p => p.Id != id);
 
-            var deleted = await _participantRepoistory.DeleteAsync(id, cancellationToken);
+            var deleted = await _participantRepository.DeleteAsync(id, cancellationToken);
 
             int i = 1;
             foreach (var existed in toReorder)
@@ -50,7 +64,7 @@ namespace Christmas.Secret.Gifter.API.Services
                 var modified = existed.ExcludedOrderIds.Where(p => p != existed.OrderId).ToArray();
                 existed.ExcludedOrderIds = modified.Append(i).ToArray();
                 existed.OrderId = i;
-                await _participantRepoistory.UpdateAsync(existed, cancellationToken);
+                await _participantRepository.UpdateAsync(existed, cancellationToken);
                 i = i + 1;
             }
 
@@ -59,7 +73,7 @@ namespace Christmas.Secret.Gifter.API.Services
 
         public async Task<Participant[]> GetAllAsync(string eventId, CancellationToken? cancellationToken = null)
         {
-            var found = await _participantRepoistory.GetAllAsync(eventId, cancellationToken);
+            var found = await _participantRepository.GetAllAsync(eventId, cancellationToken);
 
             return found.
                 Select(p => _mapper.Map<Participant>(p))
@@ -68,7 +82,7 @@ namespace Christmas.Secret.Gifter.API.Services
 
         public async Task<Participant> GetByIdAsync(string id, CancellationToken cancellationToken)
         {
-            var found = await _participantRepoistory.GetByIdAsync(id, cancellationToken);
+            var found = await _participantRepository.GetByIdAsync(id, cancellationToken);
 
             return _mapper.Map<Participant>(found);
         }
@@ -76,7 +90,7 @@ namespace Christmas.Secret.Gifter.API.Services
         public async Task<Participant> UpdateAsync(Participant item, CancellationToken cancellationToken)
         {
             var mapped = _mapper.Map<ParticipantEntry>(item);
-            var updated = await _participantRepoistory.UpdateAsync(mapped, cancellationToken);
+            var updated = await _participantRepository.UpdateAsync(mapped, cancellationToken);
 
             return _mapper.Map<Participant>(updated);
         }

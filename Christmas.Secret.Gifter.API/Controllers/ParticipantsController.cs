@@ -168,6 +168,68 @@ namespace Christmas.Secret.Gifter.API.Controllers
             }
         }
 
+        [HttpGet("events/{eventId}/[controller]/check-name-existance/{name}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Participant))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> CheckIfNameAlreadyExist(
+            string eventId,
+            string name,
+            CancellationToken cancellationToken)
+        {
+            try
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var existedEvent = await _eventService.GetByIdAsync(eventId, cancellationToken);
+
+                if (existedEvent == null)
+                {
+                    return NotFound("Event with such id not registered.");
+                }
+
+                var existed = await _participantService.CheckIfNameAlreadyExist(eventId, name, cancellationToken);
+
+                return Ok(existed);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("events/{eventId}/[controller]/check-email-existance/{email}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Participant))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> CheckIfEmailAlreadyExist(
+            string eventId,
+            string email,
+            CancellationToken cancellationToken)
+        {
+            try
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var existedEvent = await _eventService.GetByIdAsync(eventId, cancellationToken);
+
+                if (existedEvent == null)
+                {
+                    return NotFound("Event with such id not registered.");
+                }
+
+                var existed = await _participantService.CheckIfEmailAlreadyExist(eventId, email, cancellationToken);
+
+                return Ok(existed);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("events/{eventId}/[controller]/all")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Participant[]))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

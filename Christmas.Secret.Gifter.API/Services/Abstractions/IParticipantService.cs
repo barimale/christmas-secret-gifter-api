@@ -8,5 +8,7 @@ namespace Christmas.Secret.Gifter.API.Services.Abstractions
     public interface IParticipantService : IBaseRepositoryOuterScope<Participant, string>, IBaseRepositoryInnerScope<Participant, string>
     {
         Task<Participant[]> GetAllAsync(string eventId, CancellationToken? cancellationToken = null);
+        Task<bool> CheckIfNameAlreadyExist(string eventId, string name, CancellationToken? cancellationToken = null);
+        Task<bool> CheckIfEmailAlreadyExist(string eventId, string email, CancellationToken? cancellationToken = null);
     }
 }
