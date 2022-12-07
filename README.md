@@ -111,4 +111,10 @@ git push heroku main
 In case of any error:
 ```
 heroku logs --tail
+heroku ps:scale web=1
+```
+
+# Private Server
+```
+https://askubuntu.com/questions/716429/how-to-put-my-server-on-the-internet
 ```
