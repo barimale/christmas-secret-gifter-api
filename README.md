@@ -1,3 +1,9 @@
+# Todos
+check why constraints and objectives are used locally 
+only.
+maybe because it is implemented in the second step
+? 
+
 # Mini-server configuration
 ```
 Public IP: 94.132.173.156
