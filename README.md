@@ -1,8 +1,6 @@
 # Todos
-check why constraints and objectives are used locally 
-only.
-maybe because it is implemented in the second step
-? 
+check why constraints and objectives - maybe not needed to use 
+local refs for them as it doesn't look meaningfully.
 
 # Mini-server configuration
 ```
