@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  dockerRegistryServiceConnection: '<SERVICE_CONNECTION_NAME>'
+  dockerRegistryServiceConnection: 'christmas-secret-gifter-api_group'
   imageRepository: 'christmas-secret-gifter-api'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
