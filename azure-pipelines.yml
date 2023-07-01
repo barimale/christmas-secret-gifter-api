@@ -11,7 +11,7 @@ pool:
 
 variables:
   dockerRegistryServiceConnection: 'christmas-secret-gifter-api_group'
-  imageRepository: 'christmas-secret-gifter-api'
+  imageRepository: 'christmas-secret-gifter'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
 
