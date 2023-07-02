@@ -14,6 +14,7 @@ variables:
   imageRepository: 'barimale/christmas-secret-gifter'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
+  latestTag: 'latest'
 
 steps:
 - task: DockerInstaller@0
@@ -29,3 +30,13 @@ steps:
     dockerfile: $(dockerfilePath)
     tags: |
       $(tag)
+
+- task: Docker@2
+  displayName: Build and publish image as latest to Docker Hub Registry                      
+  inputs:
+    command: buildAndPush
+    containerRegistry: $(dockerRegistryServiceConnection)
+    repository: $(imageRepository)
+    dockerfile: $(dockerfilePath)
+    tags: |
+      $(latestTag)
