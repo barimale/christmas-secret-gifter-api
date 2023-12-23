@@ -1,4 +1,4 @@
-# Format and lint
+# Format
 ```
 dotnet tool install -g dotnet-format
 ```
