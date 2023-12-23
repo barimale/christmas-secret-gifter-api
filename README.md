@@ -1,29 +1,3 @@
-# Todos
-check why constraints and objectives - maybe not needed to use 
-local refs for them as it doesn't look meaningfully.
-
-# Mini-server configuration
-```
-Public IP: 94.132.173.156
-Local IP: 192.168.2.100
-
-username: albergue
-password: albergue 
-```
-
-```
-scp -r ./bin/Release/net5.0/publish/* albergue@192.168.2.100:/var/www/albergue.administrator
-
-sudo cp ./Properties/albergue-administrator.service /etc/systemd/system/albergue-administrator.service
-sudo systemctl daemon-reload
-cd /etc/systemd/system
-sudo systemctl enable albergue-administrator.service
-sudo sudo journalctl -fu albergue-administrator.service
-
-```
-
-https://localhost:5021;
-
 # Format and lint
 ```
 dotnet tool install -g dotnet-format
@@ -79,46 +53,4 @@ dotnet nuget locals all --clear
 # Algorithm
 ```
 https://developers.google.com/optimization/assignment/assignment_example
-```
-
-# Heroku deployment
-## Prereqs
-```
-heroku-cli
-docker
-```
-# First steps
-```
-choco install heroku-cli
-heroku login
-heroku container:login
-heroku create
-heroku stack:set container
-```
-As a result the app in Heroku is created.
-## Startup
-Each time, you want to deploy the app to Heroku:
-```
-heroku login
-heroku container:login
-heroku container:push web -a lit-spire-23553
-heroku container:release web -a lit-spire-23553
-```
-or:
-```
-heroku login
-heroku container:login
-heroku git:remote -a lit-spire-23553
-heroku stack:set container
-git push heroku main
-```
-In case of any error:
-```
-heroku logs --tail
-heroku ps:scale web=1
-```
-
-# Private Server
-```
-https://askubuntu.com/questions/716429/how-to-put-my-server-on-the-internet
 ```
