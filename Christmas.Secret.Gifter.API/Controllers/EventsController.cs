@@ -65,7 +65,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var existed = await _mediator
-                    .Send(new GetByIdQuery(eventId),
+                    .Send(new GetGiftEventByIdQuery(eventId),
                         cancellationToken);
 
                 if (existed == null)
@@ -97,7 +97,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var existed = await _mediator
-                    .Send(new GetByIdQuery(id),
+                    .Send(new GetGiftEventByIdQuery(id),
                         cancellationToken);
 
                 if (existed == null)

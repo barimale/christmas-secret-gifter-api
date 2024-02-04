@@ -49,7 +49,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var existedEvent = await _mediator
-                   .Send(new GetByIdQuery(eventId),
+                   .Send(new GetGiftEventByIdQuery(eventId),
                        cancellationToken);
 
                 if (existedEvent == null)
@@ -57,8 +57,9 @@ namespace Christmas.Secret.Gifter.API.Controllers
                     return NotFound("Event with such id not registered.");
                 }
 
-                // continue from here WIP
-                var created = await _participantService.AddAsync(input, cancellationToken);
+                var created = await _mediator
+                   .Send(new AddParticipantCommand(input),
+                       cancellationToken);
 
                 return Ok(created);
             }
@@ -83,20 +84,25 @@ namespace Christmas.Secret.Gifter.API.Controllers
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var existedEvent = await _eventService.GetByIdAsync(eventId, cancellationToken);
+                var existedEvent = await _mediator
+                  .Send(new GetGiftEventByIdQuery(eventId),
+                      cancellationToken);
 
                 if (existedEvent == null)
                 {
                     return NotFound("Event with such id not registered.");
                 }
 
-                var existed = await _participantService.GetByIdAsync(id, cancellationToken);
+                var existed = await _mediator
+                  .Send(new GetParticipantByIdQuery(input.Id),
+                      cancellationToken);
 
                 if (existed == null)
                 {
                     return NotFound("Participant with such id not created.");
                 }
 
+                // WIP continue from here
                 var updated = await _participantService.UpdateAsync(input, cancellationToken);
 
                 return Ok(updated);
@@ -121,7 +127,9 @@ namespace Christmas.Secret.Gifter.API.Controllers
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var existedEvent = await _eventService.GetByIdAsync(eventId, cancellationToken);
+                var existedEvent = await _mediator
+                  .Send(new GetGiftEventByIdQuery(eventId),
+                      cancellationToken);
 
                 if (existedEvent == null)
                 {
@@ -152,18 +160,22 @@ namespace Christmas.Secret.Gifter.API.Controllers
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var existedEvent = await _eventService.GetByIdAsync(eventId, cancellationToken);
+                var existedEvent = await _mediator
+                   .Send(new GetGiftEventByIdQuery(eventId),
+                       cancellationToken);
 
                 if (existedEvent == null)
                 {
                     return NotFound("Event with such id not registered.");
                 }
 
-                var existed = await _participantService.GetByIdAsync(id, cancellationToken);
+                var existed = await _mediator
+                  .Send(new GetParticipantByIdQuery(id),
+                      cancellationToken);
 
                 if (existed == null)
                 {
-                    return NotFound();
+                    return NotFound("Participant with such id not created.");
                 }
 
                 return Ok(existed);
@@ -188,7 +200,9 @@ namespace Christmas.Secret.Gifter.API.Controllers
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var existedEvent = await _eventService.GetByIdAsync(eventId, cancellationToken);
+                var existedEvent = await _mediator
+                   .Send(new GetGiftEventByIdQuery(eventId),
+                       cancellationToken);
 
                 if (existedEvent == null)
                 {
@@ -219,7 +233,9 @@ namespace Christmas.Secret.Gifter.API.Controllers
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var existedEvent = await _eventService.GetByIdAsync(eventId, cancellationToken);
+                var existedEvent = await _mediator
+                  .Send(new GetGiftEventByIdQuery(eventId),
+                      cancellationToken);
 
                 if (existedEvent == null)
                 {
@@ -251,7 +267,9 @@ namespace Christmas.Secret.Gifter.API.Controllers
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var existedEvent = await _eventService.GetByIdAsync(eventId, cancellationToken);
+                var existedEvent = await _mediator
+                  .Send(new GetGiftEventByIdQuery(eventId),
+                      cancellationToken);
 
                 if (existedEvent == null)
                 {
@@ -283,7 +301,9 @@ namespace Christmas.Secret.Gifter.API.Controllers
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var existedEvent = await _eventService.GetByIdAsync(eventId, cancellationToken);
+                var existedEvent = await _mediator
+                   .Send(new GetGiftEventByIdQuery(eventId),
+                       cancellationToken);
 
                 if (existedEvent == null)
                 {
@@ -313,7 +333,9 @@ namespace Christmas.Secret.Gifter.API.Controllers
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var existedEvent = await _eventService.GetByIdAsync(eventId, cancellationToken);
+                var existedEvent = await _mediator
+                  .Send(new GetGiftEventByIdQuery(eventId),
+                      cancellationToken);
 
                 if (existedEvent == null)
                 {

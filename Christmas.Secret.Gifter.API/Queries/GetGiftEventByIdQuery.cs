@@ -3,9 +3,9 @@ using MediatR;
 
 namespace Christmas.Secret.Gifter.API.Queries
 {
-    public record GetByIdQuery : IRequest<GiftEvent>
+    public record GetGiftEventByIdQuery : IRequest<GiftEvent>
     {
-        public GetByIdQuery(string giftEventId)
+        public GetGiftEventByIdQuery(string giftEventId)
         {
             GiftEventId = giftEventId;
         }
