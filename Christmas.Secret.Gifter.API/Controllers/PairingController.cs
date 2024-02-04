@@ -1,6 +1,7 @@
-﻿using Algorithm.ConstraintsPairing;
-using Algorithm.ConstraintsPairing.Model.Requests;
+﻿using Algorithm.ConstraintsPairing.Model.Requests;
 using Algorithm.ConstraintsPairing.Model.Responses;
+using Christmas.Secret.Gifter.API.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,17 +19,14 @@ namespace Christmas.Secret.Gifter.API.Controllers
     public class PairingController : ControllerBase
     {
         private readonly ILogger<PairingController> _logger;
-        private readonly Engine _engine;
+        private readonly IMediator _mediator;
 
-        private PairingController()
-        {
-            _engine = new Engine();
-        }
-
-        public PairingController(ILogger<PairingController> logger)
-            : this()
+        public PairingController(
+            ILogger<PairingController> logger,
+            IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
         }
 
         [HttpPost]
@@ -39,8 +37,10 @@ namespace Christmas.Secret.Gifter.API.Controllers
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
-
-                var result = await _engine.CalculateAsync(input.ToInputData());
+                
+                var result = await _mediator
+                    .Send(new CalculateCommand(input),
+                        cancellationToken);
 
                 return Ok(new AlgorithmResponse()
                 {
