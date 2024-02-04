@@ -1,6 +1,8 @@
 ﻿using Algorithm.ConstraintsPairing.Model.Responses;
+using Christmas.Secret.Gifter.API.Queries;
 using Christmas.Secret.Gifter.API.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,15 +18,15 @@ namespace Christmas.Secret.Gifter.API.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
-        private readonly IEventService _eventService;
+        private readonly IMediator _mediator;
         private readonly ILogger<EventsController> _logger;
 
         public EventsController(
             ILogger<EventsController> logger,
-            IEventService eventService)
+            IMediator mediator)
         {
             _logger = logger;
-            _eventService = eventService;
+            _mediator = mediator;
         }
 
         [HttpPost("create")]
@@ -38,7 +40,10 @@ namespace Christmas.Secret.Gifter.API.Controllers
 
                 var newEvent = new GiftEvent();
 
-                var created = await _eventService.AddAsync(newEvent, cancellationToken);
+                var created = await _mediator
+                    .Send(
+                        new AddGiftEventCommand(newEvent),
+                        cancellationToken);
 
                 return Ok(created);
             }
@@ -59,14 +64,18 @@ namespace Christmas.Secret.Gifter.API.Controllers
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var existed = await _eventService.GetByIdAsync(eventId, cancellationToken);
+                var existed = await _mediator
+                    .Send(new GetByIdQuery(eventId),
+                        cancellationToken);
 
                 if (existed == null)
                 {
                     return NotFound();
                 }
 
-                var result = await _eventService.ExecuteAsync(existed, cancellationToken);
+                var result = await _mediator
+                    .Send(new ExecuteEngineCommand(existed),
+                        cancellationToken);
 
                 return Ok(result);
             }
@@ -87,7 +96,9 @@ namespace Christmas.Secret.Gifter.API.Controllers
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var existed = await _eventService.GetByIdAsync(id, cancellationToken);
+                var existed = await _mediator
+                    .Send(new GetByIdQuery(id),
+                        cancellationToken);
 
                 if (existed == null)
                 {

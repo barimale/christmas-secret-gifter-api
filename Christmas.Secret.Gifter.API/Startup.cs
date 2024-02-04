@@ -34,6 +34,7 @@ namespace Christmas.Secret.Gifter.API
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddSingleton<ILocalesStatusHub, LocalesStatusHub>();
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
 
             services.AddScoped<IImageExtractor, ImageExtractor>();
             services.AddScoped<ILocalesGenerator, LocalesGenerator>();
