@@ -2,11 +2,11 @@
 using Christmas.Secret.Gifter.Domain;
 using MediatR;
 
-namespace Christmas.Secret.Gifter.API.Commands.GiftEvents
+namespace Christmas.Secret.Gifter.API.Commands.GiftEventCommands
 {
-    public record AddGiftEventCommand : IRequest<GiftEvent>
+    public record ExecuteEngineCommand : IRequest<AlgorithmResponse>
     {
-        public AddGiftEventCommand(GiftEvent giftEvent)
+        public ExecuteEngineCommand(GiftEvent giftEvent)
         {
             GiftEvent = giftEvent;
         }

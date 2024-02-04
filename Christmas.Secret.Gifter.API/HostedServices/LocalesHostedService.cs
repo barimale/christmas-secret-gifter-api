@@ -1,5 +1,5 @@
 ﻿using Christmas.Secret.Gifter.API.HostedServices.Hub;
-using Christmas.Secret.Gifter.API.Services;
+using Christmas.Secret.Gifter.API.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;

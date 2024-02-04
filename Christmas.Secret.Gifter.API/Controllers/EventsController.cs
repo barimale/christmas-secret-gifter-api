@@ -1,5 +1,5 @@
 ﻿using Algorithm.ConstraintsPairing.Model.Responses;
-using Christmas.Secret.Gifter.API.Commands.GiftEvents;
+using Christmas.Secret.Gifter.API.Commands.GiftEventCommands;
 using Christmas.Secret.Gifter.API.Queries;
 using Christmas.Secret.Gifter.Domain;
 using MediatR;

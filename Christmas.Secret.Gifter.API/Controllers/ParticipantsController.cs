@@ -1,4 +1,4 @@
-﻿using Christmas.Secret.Gifter.API.Commands.Participants;
+﻿using Christmas.Secret.Gifter.API.Commands.ParticipantCommands;
 using Christmas.Secret.Gifter.API.Queries;
 using Christmas.Secret.Gifter.API.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;

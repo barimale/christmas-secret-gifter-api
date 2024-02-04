@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Christmas.Secret.Gifter.API.Commands.Participants
+namespace Christmas.Secret.Gifter.API.Commands.ParticipantCommands
 {
     public record CheckIfEmailAlreadyExistCommand : IRequest<bool>
     {

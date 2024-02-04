@@ -1,4 +1,4 @@
-﻿using Christmas.Secret.Gifter.API.Services;
+﻿using Christmas.Secret.Gifter.API.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

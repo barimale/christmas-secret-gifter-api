@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Christmas.Secret.Gifter.API.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;
-using Christmas.Secret.Gifter.API.Commands.Participants;
+using Christmas.Secret.Gifter.API.Commands.ParticipantCommands;
 
 namespace Christmas.Secret.Gifter.API.Handlers.ParticipantHandlers
 {

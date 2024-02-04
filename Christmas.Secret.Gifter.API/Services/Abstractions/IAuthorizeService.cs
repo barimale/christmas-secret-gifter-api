@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Christmas.Secret.Gifter.API.Services
+namespace Christmas.Secret.Gifter.API.Services.Abstractions
 {
     public interface IAuthorizeService
     {

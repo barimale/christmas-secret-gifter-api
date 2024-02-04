@@ -6,7 +6,7 @@ using Algorithm.ConstraintsPairing.Model.Responses;
 using Christmas.Secret.Gifter.Domain;
 using Algorithm.ConstraintsPairing;
 using Algorithm.ConstraintsPairing.Model;
-using Christmas.Secret.Gifter.API.Commands.GiftEvents;
+using Christmas.Secret.Gifter.API.Commands.GiftEventCommands;
 
 namespace Christmas.Secret.Gifter.API.Handlers.GiftEventHandlers
 {

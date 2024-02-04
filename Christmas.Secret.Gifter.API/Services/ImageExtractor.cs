@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Christmas.Secret.Gifter.API.Services.Abstractions;
+using System.Threading.Tasks;
 
 namespace Christmas.Secret.Gifter.API.Services
 {

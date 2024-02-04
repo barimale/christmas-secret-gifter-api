@@ -1,7 +1,7 @@
 ﻿using Christmas.Secret.Gifter.Domain;
 using MediatR;
 
-namespace Christmas.Secret.Gifter.API.Commands.Participants
+namespace Christmas.Secret.Gifter.API.Commands.ParticipantCommands
 {
     public record AddParticipantCommand : IRequest<Participant>
     {

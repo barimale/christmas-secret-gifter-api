@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Christmas.Secret.Gifter.API.Services
+namespace Christmas.Secret.Gifter.API.Services.Abstractions
 {
     public interface ILocalesGenerator
     {
