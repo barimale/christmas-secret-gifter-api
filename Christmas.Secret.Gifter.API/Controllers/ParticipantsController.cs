@@ -11,6 +11,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Christmas.Secret.Gifter.API.Controllers
 {
@@ -94,7 +95,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
                 }
 
                 var existed = await _mediator
-                  .Send(new GetParticipantByIdQuery(input.Id),
+                  .Send(new GetParticipantByIdQuery(id),
                       cancellationToken);
 
                 if (existed == null)
@@ -102,8 +103,9 @@ namespace Christmas.Secret.Gifter.API.Controllers
                     return NotFound("Participant with such id not created.");
                 }
 
-                // WIP continue from here
-                var updated = await _participantService.UpdateAsync(input, cancellationToken);
+                var updated = await _mediator
+                  .Send(new UpdateParticipantCommand(input),
+                      cancellationToken);
 
                 return Ok(updated);
             }
@@ -136,7 +138,9 @@ namespace Christmas.Secret.Gifter.API.Controllers
                     return NotFound("Event with such id not registered.");
                 }
 
-                var deleted = await _participantService.DeleteAsync(id, cancellationToken);
+                var deleted = await _mediator
+                  .Send(new DeleteParticipantCommand(id),
+                      cancellationToken);
 
                 return Ok(deleted);
             }
@@ -209,7 +213,9 @@ namespace Christmas.Secret.Gifter.API.Controllers
                     return NotFound("Event with such id not registered.");
                 }
 
-                var existed = await _participantService.CheckIfNameAlreadyExist(eventId, name, cancellationToken);
+                var existed = await _mediator
+                   .Send(new CheckIfNameAlreadyExistCommand(eventId, name),
+                       cancellationToken);
 
                 return Ok(existed);
             }
@@ -242,7 +248,9 @@ namespace Christmas.Secret.Gifter.API.Controllers
                     return NotFound("Event with such id not registered.");
                 }
 
-                var existed = await _participantService.CheckIfEmailAlreadyExist(eventId, email, cancellationToken);
+                var existed = await _mediator
+                  .Send(new CheckIfEmailAlreadyExistCommand(eventId, email),
+                      cancellationToken);
 
                 return Ok(existed);
             }
@@ -276,7 +284,12 @@ namespace Christmas.Secret.Gifter.API.Controllers
                     return NotFound("Event with such id not registered.");
                 }
 
-                var existed = await _participantService.CheckIfNameAlreadyExistEditMode(eventId, participantId, name, cancellationToken);
+                var existed = await _mediator
+                  .Send(new CheckIfNameAlreadyExistEditModeCommand(
+                      eventId,
+                      participantId,
+                      name),
+                      cancellationToken);
 
                 return Ok(existed);
             }
@@ -310,7 +323,12 @@ namespace Christmas.Secret.Gifter.API.Controllers
                     return NotFound("Event with such id not registered.");
                 }
 
-                var existed = await _participantService.CheckIfEmailAlreadyExistEditMode(eventId, participantId, email, cancellationToken);
+                var existed = await _mediator
+                  .Send(new CheckIfEmailAlreadyExistEditModeCommand(
+                        eventId,
+                        participantId,
+                        email),
+                      cancellationToken);
 
                 return Ok(existed);
             }
