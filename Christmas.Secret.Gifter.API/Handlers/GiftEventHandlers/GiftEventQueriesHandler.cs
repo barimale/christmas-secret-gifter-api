@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using System.Threading;
 using Christmas.Secret.Gifter.API.Services.Abstractions;
 
-namespace Christmas.Secret.Gifter.API.Handlers
+namespace Christmas.Secret.Gifter.API.Handlers.GiftEventHandlers
 {
-    internal sealed class GiftEventQueriesHandler : 
+    internal sealed class GiftEventQueriesHandler :
         IRequestHandler<GetGiftEventByIdQuery, GiftEvent>
     {
         private readonly IEventService _eventService;

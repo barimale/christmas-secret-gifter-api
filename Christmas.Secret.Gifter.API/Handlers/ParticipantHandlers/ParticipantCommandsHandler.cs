@@ -1,11 +1,11 @@
-﻿using Christmas.Secret.Gifter.API.Queries;
-using MediatR;
+﻿using MediatR;
 using System.Threading.Tasks;
 using System.Threading;
 using Christmas.Secret.Gifter.API.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;
+using Christmas.Secret.Gifter.API.Commands.Participants;
 
-namespace Christmas.Secret.Gifter.API.Handlers
+namespace Christmas.Secret.Gifter.API.Handlers.ParticipantHandlers
 {
     internal sealed class ParticipantCommandsHandler :
         IRequestHandler<AddParticipantCommand, Participant>,

@@ -1,4 +1,5 @@
-﻿using Christmas.Secret.Gifter.API.Queries;
+﻿using Christmas.Secret.Gifter.API.Commands.Participants;
+using Christmas.Secret.Gifter.API.Queries;
 using Christmas.Secret.Gifter.API.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;
 using MediatR;
@@ -11,7 +12,6 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Christmas.Secret.Gifter.API.Controllers
 {

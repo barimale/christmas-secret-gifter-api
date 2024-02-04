@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Christmas.Secret.Gifter.API.Queries
+namespace Christmas.Secret.Gifter.API.Commands.Participants
 {
     public record DeleteParticipantCommand : IRequest<int>
     {

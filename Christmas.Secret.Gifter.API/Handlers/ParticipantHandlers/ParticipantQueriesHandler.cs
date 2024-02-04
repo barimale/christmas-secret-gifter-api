@@ -5,7 +5,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Christmas.Secret.Gifter.API.Handlers
+namespace Christmas.Secret.Gifter.API.Handlers.ParticipantHandlers
 {
     internal sealed class ParticipantQueriesHandler :
                 IRequestHandler<GetParticipantByIdQuery, Participant>

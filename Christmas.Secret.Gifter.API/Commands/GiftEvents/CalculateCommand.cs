@@ -2,7 +2,7 @@
 using Algorithm.ConstraintsPairing.Model.Requests;
 using MediatR;
 
-namespace Christmas.Secret.Gifter.API.Queries
+namespace Christmas.Secret.Gifter.API.Commands.GiftEvents
 {
     public record CalculateCommand : IRequest<OutputDataSummary>
     {

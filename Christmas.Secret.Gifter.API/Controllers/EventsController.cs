@@ -1,6 +1,6 @@
 ﻿using Algorithm.ConstraintsPairing.Model.Responses;
+using Christmas.Secret.Gifter.API.Commands.GiftEvents;
 using Christmas.Secret.Gifter.API.Queries;
-using Christmas.Secret.Gifter.API.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

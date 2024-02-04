@@ -1,5 +1,4 @@
-﻿using Christmas.Secret.Gifter.API.Queries;
-using MediatR;
+﻿using MediatR;
 using System.Threading.Tasks;
 using System.Threading;
 using Christmas.Secret.Gifter.API.Services.Abstractions;
@@ -7,8 +6,9 @@ using Algorithm.ConstraintsPairing.Model.Responses;
 using Christmas.Secret.Gifter.Domain;
 using Algorithm.ConstraintsPairing;
 using Algorithm.ConstraintsPairing.Model;
+using Christmas.Secret.Gifter.API.Commands.GiftEvents;
 
-namespace Christmas.Secret.Gifter.API.Handlers
+namespace Christmas.Secret.Gifter.API.Handlers.GiftEventHandlers
 {
     internal sealed class GiftEventCommandsHandler :
         IRequestHandler<ExecuteEngineCommand, AlgorithmResponse>,
@@ -23,7 +23,7 @@ namespace Christmas.Secret.Gifter.API.Handlers
             _engine = new Engine();
         }
 
-        public GiftEventCommandsHandler(IEventService eventService): this()
+        public GiftEventCommandsHandler(IEventService eventService) : this()
             => _eventService = eventService;
 
         public Task<AlgorithmResponse> Handle(ExecuteEngineCommand request, CancellationToken cancellationToken)
