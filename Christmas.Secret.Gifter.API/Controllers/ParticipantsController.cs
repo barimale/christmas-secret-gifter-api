@@ -1,5 +1,7 @@
-﻿using Christmas.Secret.Gifter.API.Services.Abstractions;
+﻿using Christmas.Secret.Gifter.API.Queries;
+using Christmas.Secret.Gifter.API.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,13 +22,16 @@ namespace Christmas.Secret.Gifter.API.Controllers
         private readonly IParticipantService _participantService;
         private readonly IEventService _eventService;
         private readonly ILogger<ParticipantsController> _logger;
+        private readonly IMediator _mediator;
 
         public ParticipantsController(
             ILogger<ParticipantsController> logger,
             IParticipantService participantService,
-            IEventService eventService)
+            IEventService eventService,
+            IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
             _participantService = participantService;
             _eventService = eventService;
         }
@@ -43,13 +48,16 @@ namespace Christmas.Secret.Gifter.API.Controllers
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var existedEvent = await _eventService.GetByIdAsync(eventId, cancellationToken);
+                var existedEvent = await _mediator
+                   .Send(new GetByIdQuery(eventId),
+                       cancellationToken);
 
                 if (existedEvent == null)
                 {
                     return NotFound("Event with such id not registered.");
                 }
 
+                // continue from here WIP
                 var created = await _participantService.AddAsync(input, cancellationToken);
 
                 return Ok(created);
