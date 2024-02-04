@@ -7,7 +7,7 @@ using Christmas.Secret.Gifter.API.Services.Abstractions;
 
 namespace Christmas.Secret.Gifter.API.Handlers
 {
-    public class GiftEventQueriesHandler : 
+    internal sealed class GiftEventQueriesHandler : 
         IRequestHandler<GetByIdQuery, GiftEvent>
     {
         private readonly IEventService _eventService;

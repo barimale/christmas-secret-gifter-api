@@ -8,7 +8,7 @@ using Christmas.Secret.Gifter.Domain;
 
 namespace Christmas.Secret.Gifter.API.Handlers
 {
-    public class GiftEventCommandsHandler :
+    internal sealed class GiftEventCommandsHandler :
         IRequestHandler<ExecuteEngineCommand, AlgorithmResponse>,
         IRequestHandler<AddGiftEventCommand, GiftEvent>
     {

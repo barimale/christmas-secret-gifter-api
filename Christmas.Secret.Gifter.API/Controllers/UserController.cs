@@ -1,5 +1,5 @@
-﻿using Christmas.Secret.Gifter.API.Model;
-using Christmas.Secret.Gifter.API.Services;
+﻿using Christmas.Secret.Gifter.API.Services;
+using Christmas.Secret.Gifter.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
