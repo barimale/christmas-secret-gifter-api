@@ -14,10 +14,10 @@ namespace Christmas.Secret.Gifter.API.Behaviours
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
             CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"Handling {typeof(TRequest).Name}");
+            _logger.LogInformation($"Handling request of type: {typeof(TRequest).Name}");
             var response = await next();
 
-            _logger.LogInformation($"Handled {typeof(TResponse).Name}");
+            _logger.LogInformation($"Handled response of type: {typeof(TResponse).Name}");
 
             return response;
         }
