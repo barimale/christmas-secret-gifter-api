@@ -12,11 +12,11 @@ namespace Christmas.Secret.Gifter.Database.SQLite.SQLite.Database.Configuration
             {
                 Id = Guid.NewGuid().ToString(),
                 UserName = "Admin",
-                Email = "mateusz.wolnica@gmail.com",
+                Email = "johndoe@gmail.com",
                 LockoutEnabled = false,
-                PhoneNumber = "0048665337563",
+                PhoneNumber = "0048555666777",
                 NormalizedUserName = "ADMIN",
-                NormalizedEmail = "MATEUSZ.WOLNICA@GMAIL.COM",
+                NormalizedEmail = "JOHNDOE@GMAIL.COM",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 SecurityStamp = new Guid().ToString("D")
