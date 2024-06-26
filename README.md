@@ -17,22 +17,6 @@ Rebuild the solution and then by being in the root directory execute:
 ```
 dotnet-typegen --project-folder  ./Christmas.Secret.Gifter.Domain generate
 ```
-## Frontend Extensions - VS Code
-### Generate barrels
-```
-TypeScript Barrel Generator
-```
-### Firebase setup
-Install firebaseCLI from the official website, then execute:
-```
-npm install -g firebase-tools
-```
-### ESLint & Prettier - VS Code
-```
-npm install -D eslint prettier eslint-config-prettier --force
-npx eslint --init
-```
-
 ## Database.SQLite:
 navigate to the database project directory first.
 Then execute as follows:
