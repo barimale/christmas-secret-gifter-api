@@ -1,6 +1,4 @@
 using Christmas.Secret.Gifter.API.Behaviours;
-using Christmas.Secret.Gifter.API.HostedServices;
-using Christmas.Secret.Gifter.API.HostedServices.Hub;
 using Christmas.Secret.Gifter.API.Services;
 using Christmas.Secret.Gifter.API.Services.Abstractions;
 using Christmas.Secret.Gifter.Database.SQLite;
@@ -39,8 +37,6 @@ namespace Christmas.Secret.Gifter.API
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
             services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
-            services.AddScoped<IImageExtractor, ImageExtractor>();
-            services.AddScoped<ILocalesGenerator, LocalesGenerator>();
             services.AddScoped<IAuthorizeService, AuthorizeService>();
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<IParticipantService, ParticipantService>();
@@ -104,8 +100,6 @@ namespace Christmas.Secret.Gifter.API
                     }}, new List<string>()}
                 });
             });
-
-            services.AddHostedService<LocalesHostedService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GifterDbContext dbContext)
@@ -148,7 +142,6 @@ namespace Christmas.Secret.Gifter.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<LocalesStatusHub>("/localesHub");
             });
         }
     }
