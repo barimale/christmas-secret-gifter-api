@@ -37,7 +37,6 @@ namespace Christmas.Secret.Gifter.API
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
             services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
-            services.AddScoped<IAuthorizeService, AuthorizeService>();
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<IParticipantService, ParticipantService>();
 
@@ -49,33 +48,6 @@ namespace Christmas.Secret.Gifter.API
                     .UseSqlite(Configuration.GetConnectionString("GifterDbContext"),
                 b => b.MigrationsAssembly(typeof(GifterDbContext).Assembly.FullName)));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<GifterDbContext>()
-                .AddDefaultUI()
-                .AddDefaultTokenProviders();
-
-            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["Tokens:Key"]));
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                //options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(config =>
-            {
-                config.RequireHttpsMetadata = false;
-                config.SaveToken = true;
-                config.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    //TODO: false to true invetigate twhat needs to be corrected
-                    IssuerSigningKey = signingKey,
-                    ValidateAudience = false,
-                    ValidAudience = Configuration["Tokens:Audience"],
-                    ValidateIssuer = false,
-                    ValidIssuer = Configuration["Tokens:Issuer"],
-                    ValidateLifetime = false,
-                    ValidateIssuerSigningKey = false
-                };
-            });
-
             services.AddSignalR();
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddControllers();
@@ -84,21 +56,6 @@ namespace Christmas.Secret.Gifter.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Christmas-Secret-Gifter-API", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Description = "JWT Authorization header using the bearer scheme",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey
-                });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {new OpenApiSecurityScheme{Reference = new OpenApiReference
-                    {
-                        Id = "Bearer",
-                        Type = ReferenceType.SecurityScheme
-                    }}, new List<string>()}
-                });
             });
         }
 
