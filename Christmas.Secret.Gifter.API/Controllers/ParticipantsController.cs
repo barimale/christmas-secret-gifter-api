@@ -16,7 +16,9 @@ using System.Threading.Tasks;
 namespace Christmas.Secret.Gifter.API.Controllers
 {
     [AllowAnonymous]
+    [Route("api/v{version:apiVersion}")]
     [Route("api")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class ParticipantsController : ControllerBase
     {
