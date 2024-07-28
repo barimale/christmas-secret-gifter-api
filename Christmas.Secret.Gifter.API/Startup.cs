@@ -43,7 +43,6 @@ namespace Christmas.Secret.Gifter.API
                     .UseSqlite(Configuration.GetConnectionString("GifterDbContext"),
                 b => b.MigrationsAssembly(typeof(GifterDbContext).Assembly.FullName)));
 
-            services.AddSignalR();
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddControllers();
 
