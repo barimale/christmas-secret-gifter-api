@@ -32,7 +32,7 @@ namespace Christmas.Secret.Gifter.API
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddSingleton<ILocalesStatusHub, LocalesStatusHub>();
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Christmas.Secret.Gifter.Application.Commands.GiftEventCommands.AddGiftEventCommand).Assembly));
             services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
             services.AddScoped<IEventService, EventService>();
