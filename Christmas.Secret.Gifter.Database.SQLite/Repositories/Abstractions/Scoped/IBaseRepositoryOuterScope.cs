@@ -1,4 +1,4 @@
-﻿namespace Christmas.Secret.Gifter.Database.SQLite.Repositories.Abstractions.Scoped
+﻿namespace Christmas.Secret.Gifter.Infrastructure.Repositories.Abstractions.Scoped
 {
     public interface IBaseRepositoryOuterScope<T, U>
         where T : class

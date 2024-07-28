@@ -1,4 +1,4 @@
-﻿namespace Algorithm.ConstraintsPairing
+﻿namespace Algorithm.ConstraintsPairing.Model
 {
     public class InputData
     {

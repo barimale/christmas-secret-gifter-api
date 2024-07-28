@@ -1,7 +1,7 @@
 ﻿using Christmas.Secret.Gifter.Domain;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Christmas.Secret.Gifter.Database.SQLite.Entries
+namespace Christmas.Secret.Gifter.Infrastructure.Entities
 {
     public class EventEntry
     {

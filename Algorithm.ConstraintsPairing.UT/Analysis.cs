@@ -1,3 +1,4 @@
+using Algorithm.ConstraintsPairing.Model;
 using System.Threading.Tasks;
 using Xunit;
 

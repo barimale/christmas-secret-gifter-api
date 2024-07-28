@@ -2,16 +2,16 @@
 using Algorithm.ConstraintsPairing.Model.Requests;
 using Algorithm.ConstraintsPairing.Model.Responses;
 using AutoMapper;
-using Christmas.Secret.Gifter.API.Services.Abstractions;
-using Christmas.Secret.Gifter.Database.SQLite.Entries;
-using Christmas.Secret.Gifter.Database.SQLite.Repositories.Abstractions;
+using Christmas.Secret.Gifter.Application.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;
+using Christmas.Secret.Gifter.Infrastructure.Entities;
+using Christmas.Secret.Gifter.Infrastructure.Repositories.Abstractions;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Christmas.Secret.Gifter.API.Services
+namespace Christmas.Secret.Gifter.Application.Services
 {
     public class EventService : IEventService
     {
@@ -49,7 +49,7 @@ namespace Christmas.Secret.Gifter.API.Services
             {
                 if (existed == null)
                 {
-                    throw new System.Exception("Event not found. Create the new event first.");
+                    throw new Exception("Event not found. Create the new event first.");
                 }
 
                 switch (existed.State)
@@ -77,7 +77,7 @@ namespace Christmas.Secret.Gifter.API.Services
                         };
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
             }

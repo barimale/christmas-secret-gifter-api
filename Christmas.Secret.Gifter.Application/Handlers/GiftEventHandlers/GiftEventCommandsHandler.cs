@@ -1,14 +1,14 @@
 ﻿using MediatR;
 using System.Threading.Tasks;
 using System.Threading;
-using Christmas.Secret.Gifter.API.Services.Abstractions;
 using Algorithm.ConstraintsPairing.Model.Responses;
 using Christmas.Secret.Gifter.Domain;
 using Algorithm.ConstraintsPairing;
 using Algorithm.ConstraintsPairing.Model;
-using Christmas.Secret.Gifter.API.Commands.GiftEventCommands;
+using Christmas.Secret.Gifter.Application.Services.Abstractions;
+using Christmas.Secret.Gifter.Application.Commands.GiftEventCommands;
 
-namespace Christmas.Secret.Gifter.API.Handlers.GiftEventHandlers
+namespace Christmas.Secret.Gifter.Application.Handlers.GiftEventHandlers
 {
     internal sealed class GiftEventCommandsHandler :
         IRequestHandler<ExecuteEngineCommand, AlgorithmResponse>,

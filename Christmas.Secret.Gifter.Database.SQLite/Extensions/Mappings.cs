@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Christmas.Secret.Gifter.Database.SQLite.Entries;
 using Christmas.Secret.Gifter.Domain;
+using Christmas.Secret.Gifter.Infrastructure.Entities;
 
-namespace Christmas.Secret.Gifter.Database.SQLite.Extensions
+namespace Christmas.Secret.Gifter.Infrastructure.Extensions
 {
     public class Mappings : Profile
     {

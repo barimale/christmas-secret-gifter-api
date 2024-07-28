@@ -1,6 +1,6 @@
-﻿using Christmas.Secret.Gifter.Database.SQLite.Entries;
+﻿using Christmas.Secret.Gifter.Infrastructure.Entities;
 
-namespace Christmas.Secret.Gifter.Database.SQLite.Repositories.Abstractions
+namespace Christmas.Secret.Gifter.Infrastructure.Repositories.Abstractions
 {
     public interface IParticipantRepository : IBaseRepository<ParticipantEntry, string>
     {

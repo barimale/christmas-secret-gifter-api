@@ -1,8 +1,8 @@
-﻿using Christmas.Secret.Gifter.Database.SQLite.Entries;
+﻿using Christmas.Secret.Gifter.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Christmas.Secret.Gifter.Database.SQLite.SQLite.Database.Configuration
+namespace Christmas.Secret.Gifter.Infrastructure.EntityConfigurations
 {
     public class EventEntryConfiguration : IEntityTypeConfiguration<EventEntry>
     {

@@ -1,7 +1,6 @@
-﻿using Algorithm.ConstraintsPairing.Model;
-using Google.OrTools.LinearSolver;
+﻿using Google.OrTools.LinearSolver;
 
-namespace Algorithm.ConstraintsPairing
+namespace Algorithm.ConstraintsPairing.Model
 {
     public class OutputData
     {

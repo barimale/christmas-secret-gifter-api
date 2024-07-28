@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace Christmas.Secret.Gifter.Database.SQLite
+namespace Christmas.Secret.Gifter.Infrastructure
 {
     /* For migrations generation only */
 

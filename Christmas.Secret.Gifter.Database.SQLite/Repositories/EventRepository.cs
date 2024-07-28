@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
-using Christmas.Secret.Gifter.Database.SQLite.Entries;
-using Christmas.Secret.Gifter.Database.SQLite.Repositories.Abstractions;
+using Christmas.Secret.Gifter.Infrastructure;
+using Christmas.Secret.Gifter.Infrastructure.Entities;
+using Christmas.Secret.Gifter.Infrastructure.Repositories.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
+namespace Christmas.Secret.Gifter.Infrastructure.Repositories
 {
     internal class EventRepository : IEventRepository
     {

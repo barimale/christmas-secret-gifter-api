@@ -2,7 +2,7 @@
 using Christmas.Secret.Gifter.Domain;
 using MediatR;
 
-namespace Christmas.Secret.Gifter.API.Commands.GiftEventCommands
+namespace Christmas.Secret.Gifter.Application.Commands.GiftEventCommands
 {
     public record ExecuteEngineCommand : IRequest<AlgorithmResponse>
     {

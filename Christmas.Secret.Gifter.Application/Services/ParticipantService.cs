@@ -1,15 +1,15 @@
 ﻿using Algorithm.ConstraintsPairing;
 using AutoMapper;
-using Christmas.Secret.Gifter.API.Services.Abstractions;
-using Christmas.Secret.Gifter.Database.SQLite.Entries;
-using Christmas.Secret.Gifter.Database.SQLite.Repositories.Abstractions;
+using Christmas.Secret.Gifter.Application.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;
+using Christmas.Secret.Gifter.Infrastructure.Entities;
+using Christmas.Secret.Gifter.Infrastructure.Repositories.Abstractions;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Christmas.Secret.Gifter.API.Services
+namespace Christmas.Secret.Gifter.Application.Services
 {
     public class ParticipantService : IParticipantService
     {

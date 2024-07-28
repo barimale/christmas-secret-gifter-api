@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Christmas.Secret.Gifter.Database.SQLite.SQLite.Database.Configuration
+namespace Christmas.Secret.Gifter.Infrastructure.EntityConfigurations
 {
     public class IdentityUserEntryConfiguration : IEntityTypeConfiguration<IdentityUser>
     {

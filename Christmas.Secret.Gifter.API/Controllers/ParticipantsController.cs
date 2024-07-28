@@ -1,6 +1,6 @@
-﻿using Christmas.Secret.Gifter.API.Commands.ParticipantCommands;
-using Christmas.Secret.Gifter.API.Queries;
-using Christmas.Secret.Gifter.API.Services.Abstractions;
+﻿using Christmas.Secret.Gifter.Application.Commands.ParticipantCommands;
+using Christmas.Secret.Gifter.Application.Queries;
+using Christmas.Secret.Gifter.Application.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

@@ -1,8 +1,8 @@
-﻿using Christmas.Secret.Gifter.Database.SQLite.Repositories;
-using Christmas.Secret.Gifter.Database.SQLite.Repositories.Abstractions;
+﻿using Christmas.Secret.Gifter.Infrastructure.Repositories;
+using Christmas.Secret.Gifter.Infrastructure.Repositories.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Christmas.Secret.Gifter.Database.SQLite.Extensions
+namespace Christmas.Secret.Gifter.Infrastructure.Extensions
 {
     public static class IServiceCollectionExtension
     {

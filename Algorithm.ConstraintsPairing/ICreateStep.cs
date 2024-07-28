@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Algorithm.ConstraintsPairing.Model;
+using System.Threading.Tasks;
 
 namespace Algorithm.ConstraintsPairing
 {

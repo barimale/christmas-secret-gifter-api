@@ -1,10 +1,10 @@
-﻿using Christmas.Secret.Gifter.Database.SQLite.Entries;
+﻿using Christmas.Secret.Gifter.Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace Christmas.Secret.Gifter.Database.SQLite
+namespace Christmas.Secret.Gifter.Infrastructure
 {
     public sealed class GifterDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     {

@@ -1,24 +1,19 @@
 using Christmas.Secret.Gifter.API.Behaviours;
-using Christmas.Secret.Gifter.API.Services;
-using Christmas.Secret.Gifter.API.Services.Abstractions;
-using Christmas.Secret.Gifter.Database.SQLite;
-using Christmas.Secret.Gifter.Database.SQLite.Extensions;
+using Christmas.Secret.Gifter.Application.Services;
+using Christmas.Secret.Gifter.Application.Services.Abstractions;
+using Christmas.Secret.Gifter.Infrastructure;
+using Christmas.Secret.Gifter.Infrastructure.Extensions;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Christmas.Secret.Gifter.API
 {

@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
-using Christmas.Secret.Gifter.Database.SQLite.Entries;
-using Christmas.Secret.Gifter.Database.SQLite.Repositories.Abstractions;
+using Christmas.Secret.Gifter.Infrastructure;
+using Christmas.Secret.Gifter.Infrastructure.Entities;
+using Christmas.Secret.Gifter.Infrastructure.Repositories.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Xml.Linq;
 
-namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
+namespace Christmas.Secret.Gifter.Infrastructure.Repositories
 {
     public class ParticipantRepository : IParticipantRepository
     {
@@ -75,7 +76,7 @@ namespace Christmas.Secret.Gifter.Database.SQLite.Repositories
                 await _context.SaveChangesAsync(cancellationToken);
 
                 var result = _context
-                    .Update<ParticipantEntry>(existed);
+                    .Update(existed);
 
                 await _context.SaveChangesAsync(cancellationToken);
 

@@ -1,4 +1,5 @@
-﻿using Google.OrTools.LinearSolver;
+﻿using Algorithm.ConstraintsPairing.Model;
+using Google.OrTools.LinearSolver;
 using System;
 using System.Threading.Tasks;
 
