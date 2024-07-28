@@ -15,7 +15,6 @@ namespace Christmas.Secret.Gifter.API.Controllers
 {
     [AllowAnonymous]
     [Route("api/v{version:apiVersion}/[controller]")]
-    [Route("api/[controller]")]
     [ApiVersion("1.0")]
     [ApiController]
     public class EventsController : ControllerBase
