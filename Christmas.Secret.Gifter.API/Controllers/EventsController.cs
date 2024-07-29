@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -72,6 +73,11 @@ namespace Christmas.Secret.Gifter.API.Controllers
                 if (existed == null)
                 {
                     return NotFound();
+                }
+
+                if (existed.Participants.Count() < 2)
+                {
+                    return BadRequest("Participants count has to be equal or more then 2");
                 }
 
                 var result = await _mediator
