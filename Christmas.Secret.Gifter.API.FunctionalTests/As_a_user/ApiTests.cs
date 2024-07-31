@@ -95,22 +95,21 @@ public sealed class OrderingApiTests : IClassFixture<OrderingApiFixture>
 
     private StringContent GetParticipant(string id, string eventId)
     {
-        var newPArticipant = new Participant()
+        var newParticipant = new Participant()
         {
             Id = id,
             EventId = eventId,
-            Name = "name",
-            Email = "email@email.com"
+            Name = "name" + id,
+            Email = id + "email@email.com"
         };
 
-        var serialized = JsonSerializer.Serialize(newPArticipant);
+        var serialized = JsonSerializer.Serialize(newParticipant);
 
         return new StringContent(
-            serialized, 
-            UTF8Encoding.UTF8, 
-            "application/json")
+            serialized, UTF8Encoding.UTF8, "application/json")
         {
-            Headers = { { "x-requestid", Guid.NewGuid().ToString() } }
+            Headers = { { "x-requestid", Guid.NewGuid().ToString() },
+            { "x-api-version", "1.0" }}
         };
     }
 }
