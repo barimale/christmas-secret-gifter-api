@@ -17,6 +17,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Christmas.Secret.Gifter.API.Extensions;
 
 namespace Christmas.Secret.Gifter.API
 {
@@ -74,14 +75,7 @@ namespace Christmas.Secret.Gifter.API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GifterDbContext dbContext)
         {
-            try
-            {
-                dbContext.Database.Migrate();
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("On Migrate error");
-            }
+            app.UseMigration();
 
             if (env.IsDevelopment())
             {
