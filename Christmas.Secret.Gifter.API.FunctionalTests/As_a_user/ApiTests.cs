@@ -66,6 +66,7 @@ public sealed class OrderingApiTests : IClassFixture<OrderingApiFixture>
             // event
             var eventResponse = await _httpClient.PostAsync("api/v1/events/create", null);
             var eventId = await eventResponse.Content.ReadAsAsync<GiftEvent>();
+            
             // and three participants
             var participantA = await _httpClient.PostAsync(
                 "api/v1/events/" + eventId.Id + "/participants/register",
