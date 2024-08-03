@@ -38,7 +38,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                
+
                 var result = await _mediator
                     .Send(new CalculateCommand(input),
                         cancellationToken);

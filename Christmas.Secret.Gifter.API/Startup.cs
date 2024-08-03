@@ -14,7 +14,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Christmas.Secret.Gifter.API.Extensions;
@@ -36,13 +35,10 @@ namespace Christmas.Secret.Gifter.API
             services.AddHttpLogging(logging =>
             {
                 logging.LoggingFields = HttpLoggingFields.All;
-                //logging.RequestHeaders.Add("sec-ch-ua");
-                //logging.ResponseHeaders.Add("MyResponseHeader");
-                //logging.MediaTypeOptions.AddText("application/javascript");
                 logging.RequestBodyLogLimit = 4096;
                 logging.ResponseBodyLogLimit = 4096;
             });
-            //services.AddSingleton<ILocalesStatusHub, LocalesStatusHub>();
+
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Christmas.Secret.Gifter.Application.Commands.GiftEventCommands.AddGiftEventCommand).Assembly));
             services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 

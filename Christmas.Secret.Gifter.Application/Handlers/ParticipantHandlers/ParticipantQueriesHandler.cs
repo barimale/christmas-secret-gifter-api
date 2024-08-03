@@ -2,8 +2,6 @@
 using Christmas.Secret.Gifter.Application.Services.Abstractions;
 using Christmas.Secret.Gifter.Domain;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Christmas.Secret.Gifter.Application.Handlers.ParticipantHandlers
 {

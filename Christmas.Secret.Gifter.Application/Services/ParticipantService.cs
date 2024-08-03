@@ -5,9 +5,6 @@ using Christmas.Secret.Gifter.Domain;
 using Christmas.Secret.Gifter.Infrastructure.Entities;
 using Christmas.Secret.Gifter.Infrastructure.Repositories.Abstractions;
 using Microsoft.Extensions.Logging;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Christmas.Secret.Gifter.Application.Services
 {

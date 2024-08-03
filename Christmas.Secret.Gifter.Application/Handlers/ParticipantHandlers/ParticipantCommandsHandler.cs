@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
 using Christmas.Secret.Gifter.Domain;
 using Christmas.Secret.Gifter.Application.Services.Abstractions;
 using Christmas.Secret.Gifter.Application.Commands.ParticipantCommands;

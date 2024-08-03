@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
 using Algorithm.ConstraintsPairing.Model.Responses;
 using Christmas.Secret.Gifter.Domain;
 using Algorithm.ConstraintsPairing;

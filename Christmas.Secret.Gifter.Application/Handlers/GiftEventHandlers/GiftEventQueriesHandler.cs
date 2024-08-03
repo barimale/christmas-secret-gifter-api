@@ -1,7 +1,5 @@
 ﻿using Christmas.Secret.Gifter.Domain;
 using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
 using Christmas.Secret.Gifter.Application.Queries;
 using Christmas.Secret.Gifter.Application.Services.Abstractions;
 

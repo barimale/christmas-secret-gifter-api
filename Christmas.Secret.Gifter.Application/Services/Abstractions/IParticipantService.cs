@@ -1,7 +1,5 @@
 ﻿using Christmas.Secret.Gifter.Domain;
 using Christmas.Secret.Gifter.Infrastructure.Repositories.Abstractions.Scoped;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Christmas.Secret.Gifter.Application.Services.Abstractions
 {
