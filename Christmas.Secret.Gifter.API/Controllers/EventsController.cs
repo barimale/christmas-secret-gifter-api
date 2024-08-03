@@ -77,7 +77,7 @@ namespace Christmas.Secret.Gifter.API.Controllers
 
                 if (existed.Participants.Count() < 2)
                 {
-                    return BadRequest("Participants count has to be equal or more then 2");
+                    return UnprocessableEntity("Participants count has to be equal or more then 2");
                 }
 
                 var result = await _mediator
