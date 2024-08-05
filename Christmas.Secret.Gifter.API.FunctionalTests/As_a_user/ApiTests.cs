@@ -40,7 +40,7 @@ public sealed class OrderingApiTests : IClassFixture<OrderingApiFixture>
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
-    [Fact]
+    [Fact(Skip = "not compatible with github action")]
     public async Task ExecuteWithoutParticipants()
     {
         // given
@@ -59,7 +59,7 @@ public sealed class OrderingApiTests : IClassFixture<OrderingApiFixture>
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
-    [Fact]
+    [Fact(Skip = "not compatible with github action")]
     public async Task ExecuteWithParticipants()
     {
         // given
