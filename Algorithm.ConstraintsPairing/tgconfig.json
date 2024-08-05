@@ -1,5 +1,5 @@
 {
-  "assemblies": [ "bin/Debug/net6.0/Algorithm.ConstraintsPairing.dll" ],
+  "assemblies": [ "bin/Debug/net8.0/Algorithm.ConstraintsPairing.dll" ],
   "fileNameConverters": [ "PascalCaseToKebabCase" ],
   "propertyNameConverters": [ "PascalCaseToCamelCaseConverter" ],
   "enumValueNameConverters": [ "UnderscoreCaseToPascalCaseConverter" ],
