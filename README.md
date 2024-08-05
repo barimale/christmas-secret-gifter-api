@@ -9,7 +9,7 @@ dotnet-format .\Christmas.Secret.Gifter.API\
 ```
 
 ## TypeGen
-Install:
+Install: 
 ``` 
 dotnet tool install --global dotnet-typegen
 ```
