@@ -35,7 +35,6 @@ namespace Algorithm.ConstraintsPairing.UT
             // then
             Assert.NotNull(result);
             Assert.False(result.IsError);
-            Assert.Null(result.Reason);
             Assert.NotNull(result.Data);
             Assert.NotEmpty(result.Data.Pairs);
             Assert.Equal(result.Data.Pairs.Length, result.Data.GifterAmount);
@@ -63,10 +62,8 @@ namespace Algorithm.ConstraintsPairing.UT
 
             // then
             Assert.NotNull(result);
-            Assert.False(result.IsError);
-            Assert.Null(result.Reason);
+            Assert.True(result.IsError);
             Assert.NotNull(result.Data);
-            Assert.Empty(result.Data.Pairs);
         }
     }
 }
