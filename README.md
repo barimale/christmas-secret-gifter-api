@@ -10,7 +10,7 @@ dotnet-format .\Christmas.Secret.Gifter.API\
 
 ## TypeGen
 Install:
-```
+``` 
 dotnet tool install --global dotnet-typegen
 ```
 Rebuild the solution and then by being in the root directory execute:
