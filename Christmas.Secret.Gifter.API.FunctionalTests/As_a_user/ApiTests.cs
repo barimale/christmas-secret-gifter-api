@@ -26,7 +26,7 @@ public sealed class OrderingApiTests : IClassFixture<OrderingApiFixture>
         _httpClient = _webApplicationFactory.CreateDefaultClient(handler);
     }
 
-    [Fact(Skip = "not compatible with github action")]
+    [Fact]
     public async Task CreateEvent()
     {
         //given
@@ -40,7 +40,7 @@ public sealed class OrderingApiTests : IClassFixture<OrderingApiFixture>
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
-    [Fact(Skip = "not compatible with github action")]
+    [Fact]
     public async Task ExecuteWithoutParticipants()
     {
         // given
@@ -59,7 +59,7 @@ public sealed class OrderingApiTests : IClassFixture<OrderingApiFixture>
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 
-    [Fact(Skip = "not compatible with github action")]
+    [Fact]
     public async Task ExecuteWithParticipants()
     {
         // given
