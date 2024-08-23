@@ -32,6 +32,8 @@ namespace Christmas.Secret.Gifter.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddProblemDetails();
+            
             services.AddHttpLogging(logging =>
             {
                 logging.LoggingFields = HttpLoggingFields.All;
