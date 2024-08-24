@@ -56,7 +56,7 @@ public sealed class OrderingApiTests : IClassFixture<OrderingApiFixture>
         var s = await response.Content.ReadAsStringAsync();
 
         // then
-        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        Assert.Equal(HttpStatusCode.UnprocessableContent, response.StatusCode);
     }
 
     [Fact]
