@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Asp.Versioning;
 using Asp.Versioning.Http;
-using Christmas.Secret.Gifter.Application.Queries;
 using Christmas.Secret.Gifter.Domain;
 using eShop.Ordering.FunctionalTests;
 using Microsoft.AspNetCore.Mvc.Testing;
