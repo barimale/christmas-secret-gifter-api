@@ -21,21 +21,15 @@ namespace Christmas.Secret.Gifter.API.Controllers
     [ApiController]
     public class ParticipantsController : ControllerBase
     {
-        private readonly IParticipantService _participantService;
-        private readonly IEventService _eventService;
         private readonly ILogger<ParticipantsController> _logger;
         private readonly IMediator _mediator;
 
         public ParticipantsController(
             ILogger<ParticipantsController> logger,
-            IParticipantService participantService,
-            IEventService eventService,
             IMediator mediator)
         {
             _logger = logger;
             _mediator = mediator;
-            _participantService = participantService;
-            _eventService = eventService;
         }
 
         [HttpPost("events/{eventId}/[controller]/register")]
