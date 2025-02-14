@@ -14,7 +14,7 @@ Install:
 ``` 
 dotnet tool install --global dotnet-typegen
 ```
-Rebuild the solution and then by being in the root directory execute:
+Rebuild the solution and then being in the root directory execute:
 ```
 dotnet-typegen --project-folder  ./Christmas.Secret.Gifter.Domain generate
 ```
