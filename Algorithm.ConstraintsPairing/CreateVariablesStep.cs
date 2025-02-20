@@ -7,6 +7,8 @@ namespace Algorithm.ConstraintsPairing
 {
     public class CreateVariablesStep : ICreateStep
     {
+        private const int Exclusion_Value = 100;
+
         protected Solver _solver;
 
         public CreateVariablesStep()
@@ -45,7 +47,7 @@ namespace Algorithm.ConstraintsPairing
                     {
                         x[i, j] = _solver.MakeIntVar(0, 0, $"No assignment to yourself");
                     }
-                    else if (input.Costs[i, j] == 100)
+                    else if (input.Costs[i, j] == Exclusion_Value)
                     {
                         x[i, j] = _solver.MakeIntVar(0, 0, $"No assignment when the participant is excluded");
                     }
